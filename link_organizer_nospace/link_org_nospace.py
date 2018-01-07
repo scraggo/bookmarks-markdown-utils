@@ -106,16 +106,19 @@ def main():
     input('> ')
     todoTxt = pyperclip.paste()
     todoArray = todoTxt.split('\n')
-
-    # encodedTodos = []
-    # blocks = blockEncoder()
     links = App(todoArray)
     links.block_encoder()
-    print('\n'*20, 'Finished!\n\n\n')
-    headerList = links.header_list.sort()
-    headerList = ', '.join(links.header_list)
+
+    ### encapsulate in an App method:
+    headerList = list(links.header_list)
+    headerList.sort()
+    headerList = ', '.join(headerList)
+    ##################################
+
     allLinks = links.return_sorted()
     pyperclip.copy(headerList + '\n\n' + allLinks)
+    print('\n'*20)
+    print('Finished!')
     print('Sorted links were copied to your clipboard.')
 
 if __name__ == '__main__':
