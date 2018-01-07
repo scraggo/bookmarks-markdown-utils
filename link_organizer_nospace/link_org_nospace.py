@@ -107,6 +107,7 @@ def main():
     links = App(todoArray)
     links.block_encoder()
     print('\n'*20, 'Finished!\n\n\n')
+    headerList = links.header_list.sort()
     headerList = ', '.join(links.header_list)
     allLinks = links.return_sorted()
     pyperclip.copy(headerList + '\n\n' + allLinks)
