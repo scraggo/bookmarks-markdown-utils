@@ -11,6 +11,11 @@ Title: Markdown link organizer
     output format from my markdown encoder
     see example below for the expected in format
     - no spaces between each link.
+
+Needs work:
+    Block encoder - split into two or more methods: 
+        tag_links and block_encoder
+    Private methods for the vars in __init__ (so I can sort and return them, keeping immutable)
 """
 # import itertools
 # from pprint import pprint
