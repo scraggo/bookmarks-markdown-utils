@@ -110,14 +110,14 @@ def main():
     links.block_encoder()
 
     ### encapsulate in an App method:
-    headerList = list(links.header_list)
+    headerList = list(set(links.header_list))
     headerList.sort()
     headerList = ', '.join(headerList)
     ##################################
 
     allLinks = links.return_sorted()
     pyperclip.copy(headerList + '\n\n' + allLinks)
-    print('\n'*20)
+    print('\n'*12)
     print('Finished!')
     print('Sorted links were copied to your clipboard.')
 
