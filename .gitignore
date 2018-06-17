@@ -1,2 +1,15 @@
 .DS_Store
 .vscode/
+
+# directories
+reference
+old
+
+*.pyc
+__pycache__/
+
+# config (created with script)
+
+*/chr_config.py
+*/config.json
+
