@@ -1,3 +1,7 @@
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import os
 import platform
 import re
@@ -7,8 +11,8 @@ import subprocess
 
 # Variable declarations
 userhome = os.path.expanduser('~').replace('\\', '\\\\')
-useros = platform.system() #checked - Darwin.
-# destination = os.path.dirname(os.path.realpath(__file__)) #/Users/davecohen/Dropbox/Notes/-BookmarkProject/Chrome-Bookmarks-Parser-master
+useros = platform.system()
+destination = os.path.dirname(os.path.realpath(__file__))
 cmd = ['python', 'Chrome_Bookmarks_MinHTML.py']
 
 def getChromePath():
@@ -46,15 +50,16 @@ def getChromePath():
 
     # Check if platform is Mac OS X.
     elif useros == 'Darwin':
+        DARWIN_PATH = 'Library/Application Support/Google/Chrome/Default'
         profilePath = os.path.normpath(os.path.join(
-            userhome, 'Library/Application Support/Google/Chrome/Default'))
+            userhome, DARWIN_PATH))
         if os.path.exists(profilePath):
             return profilePath
         else:
             sys.exit("Cannot find Chrome Library path.")
 
     # Check if platform is Linux.
-    elif useros is 'Linux':
+    elif useros == 'Linux':
         profilePath = os.path.normpath(os.path.join(
             userhome, '/.config/google-chrome/Default'))
         filePath = os.path.normpath(os.path.join(
@@ -66,7 +71,9 @@ def getChromePath():
 
 # print(getChromePath()) #tested, works
 
-def getChromeBak(chrPath):
+def getChromeBak(chrPath = None):
+    if not chrPath:
+        chrPath = getChromePath()
     filePath = os.path.join(
         chrPath, "Bookmarks.bak")
 #         print(filePath) #debug
@@ -76,12 +83,13 @@ def getChromeBak(chrPath):
     else:
         sys.exit("Cannot find Bookmarks.bak file.")
     
-def getChromeJSON(chrPath):
+def getChromeJSON(chrPath = None):
     '''This is the main bookmarks file, without .bak extension.'''
+    if not chrPath:
+        chrPath = getChromePath()
     JSONfilePath = os.path.join(
         chrPath, "Bookmarks")
     if os.path.exists(JSONfilePath):
         return JSONfilePath
     else:
         sys.exit("Cannot find main Chrome Bookmarks file.")
-    
