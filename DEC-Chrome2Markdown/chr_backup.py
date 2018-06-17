@@ -1,3 +1,6 @@
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 '''
 chr_backup.py
 Purpose: backs up the Chrome JSON 'Backup' file and adds date to it.
@@ -11,25 +14,25 @@ This file can be run independently of chr2mkdown.
 #Standard library:
 import os, sys, shutil
 #Local modules:
-from chr_config import myConfig
+from chr_config import directories
 import date_append as DA
-from chr_path import *
+import chr_path
+from file_utils import FileUtils
 
-def fileExists(filePath):
-    if os.path.exists(filePath):
-        raise OSError(filePath + ' file exists.')
 
 def chrBackup():
-    #Chrome file - check output location
-    chr_fullPath = getChromeJSON(getChromePath())
+    '''
+    copy and rename 'Bookmarks' file with date appended to it to 
+    specified directory in config,
+    '''
+    fileUtils = FileUtils()
+    #Get chrome path of Bookmarks file
+    chr_fullPath = chr_path.getChromeJSON(chr_path.getChromePath())
 
-    chr_dir, chr_file = os.path.split(chr_fullPath)
-    chr_output = os.path.join(myConfig['myBackupDest'], chr_file)
-    fileExists(chr_output) #raises error if exists
+    chr_file = os.path.split(chr_fullPath)[1]
 
-    shutil.copy(chr_fullPath, myConfig['myBackupDest'])
+    #Append date
+    fileWithDate = DA.date_append_filename(chr_file)
 
-    chr_rename = DA.date_append(chr_output)
-    fileExists(chr_rename) #raises error if exists
-
-    shutil.move(chr_output, chr_rename)
+    #Return path of copied file - error thrown if exists
+    return fileUtils.copy_to_chrJsonBackupsDir(chr_fullPath, fileWithDate)
