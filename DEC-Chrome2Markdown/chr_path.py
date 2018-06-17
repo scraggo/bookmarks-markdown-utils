@@ -7,13 +7,13 @@ import platform
 import re
 import sys
 from shutil import copy
-import subprocess
+# import subprocess
 
 # Variable declarations
 userhome = os.path.expanduser('~').replace('\\', '\\\\')
 useros = platform.system()
 destination = os.path.dirname(os.path.realpath(__file__))
-cmd = ['python', 'Chrome_Bookmarks_MinHTML.py']
+# cmd = ['python', 'Chrome_Bookmarks_MinHTML.py']
 
 def getChromePath():
 

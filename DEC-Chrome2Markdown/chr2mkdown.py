@@ -71,7 +71,7 @@ class MarkdownCreator:
         return True
 
     def create_output_path(self):
-        md_oTemp = os.path.join(config.directories['bookmarksRootDir'], config.filenames['chr_md_file_prefix'])
+        md_oTemp = os.path.join(config.directories['bookmarksRootDir'], config.directories['markdownBackupsDir'], config.filenames['chr_md_file_prefix'])
         self.md_output = DA.date_append(md_oTemp)
 
     def write_bookmarks_to_file(self, _chrJSON):
@@ -111,13 +111,10 @@ class MarkdownCreator:
         #Markdown file - check output location
         fileUtils.fileExists(self.md_output) #raises error if exists
 
-        # chrJSON = input('')
-        # chrJSON = '/Users/davecohen/Library/Application Support/Google/Chrome/Default/Bookmarks'
-
         #Create Markdown from original "Bookmarks" file
         chrJSON = getChromeJSON()
 
-        print('chrJSON', chrJSON)#debug
+        # print('chrJSON', chrJSON)#debug
 
         self.write_bookmarks_to_file(chrJSON)
 
