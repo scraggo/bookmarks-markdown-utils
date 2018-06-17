@@ -22,7 +22,7 @@ class FileUtils:
   def join_path(self, top_dir):
     return os.path.join(directories['bookmarksRootDir'], top_dir)
 
-  def copy_rename_file(self, top_dir, input_file_path, new_file_name):
+  def copy_rename_file(self, top_dir, input_file_path, new_file_name = False):
     output = self.join_path(directories[top_dir])
     if new_file_name:
       output = os.path.join(output, new_file_name)
@@ -37,5 +37,5 @@ class FileUtils:
     output = self.join_path(directories['markdownBackupsDir'])
     return shutil.copy(input_file_path, output)
 
-  def copy_to_chrJsonBackupsDir(self, input_file_path, new_file_name = False):
+  def copy_to_chrJsonBackupsDir(self, input_file_path, new_file_name):
     return self.copy_rename_file('chrJsonBackupsDir', input_file_path, new_file_name)
