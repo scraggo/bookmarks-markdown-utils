@@ -13,6 +13,9 @@ def todayDate():
     '''
     return d.now().strftime("%y%m%d")
 
+def date_append_filename(filename):
+    return ''.join([filename, '-', todayDate()])
+
 def date_append(filePath):
     '''param::filePath - a string of a valid filePath for a proposed file to 
     create or overwrite. Example: '/my/valid/directory/proposed-file-name.txt'
