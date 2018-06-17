@@ -33,10 +33,12 @@ replace:
 
 #Standard library:
 import os
+import subprocess
 
 from chr_backup import chrBackup
 from chr2mkdown import MarkdownCreator
 from move_files import move_files
+import chr_config
 
 def test_things():
   md_creator = MarkdownCreator()
@@ -47,15 +49,17 @@ def test_things():
   print(path, file_name)
 
 def main():
-  #Backup bookmarks
-  chrBackup()
+
+  chrBackup()  #Backup bookmarks
 
   md_creator = MarkdownCreator()
   md_creator.run_script()
   new_file_path = md_creator.md_output
-  path, file_name = os.path.split(new_file_path)
-  print('Split up the path and file name:\n', path, file_name)
+  # path, file_name = os.path.split(new_file_path)
+  # print('Split up the path and file name:\n', path, file_name)
   # move_files(new_file_path)
+  subprocess.run(['node', chr_config.node_scripts['deleteLeadingText'], new_file_path])
+
 
 if __name__ == '__main__':
   # test_things()

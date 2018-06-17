@@ -1,11 +1,11 @@
-# TOC
-#=========
-# Issues
-# Problem
-# Ideas
-# Output
-#=========
-# COMMITS / ISSUES
+## 180617
+
+Splitting a lot of functions into little functions.
+
+- Move date_append to FileUtils. Make the function more flexible.
+- rewrite Node script. Best to need to return from it to hook it into next part of script.
+- keep reorganizing.
+
 
 ## 180616
 
