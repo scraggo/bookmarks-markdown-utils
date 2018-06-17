@@ -36,7 +36,6 @@ def replacer(str):
 
 
 JSONfile = input('Path to Firefox backup JSON file:')
-# /Users/davecohen/Dropbox/Notes/-BookmarkProject/BookmarkExports/-firefox-json/bookmarks-2017-06-04.json
 
 with open(JSONfile, encoding='utf-8') as data_file:    
     data = json.loads(data_file.read())
@@ -47,10 +46,12 @@ dataList = str(data).split(', ')
 # print(dataList)
 # sys.exit()
 
-# don't need?
-# textfile = textfile.split('\n')
+config = None
+with open("config.json", "r") as read_file:
+    config = json.load(read_file)
 
-outputlocation = os.path.join('/Users/davecohen/Dropbox/Notes/-BookmarkProject', '--firefox-date.md')
+outputlocation = os.path.join(config['outputDir'], '--firefox-date.md')
+
 print('Save to ' + outputlocation + '?')
 quit = input('Press y if ok. If not ok, press enter. ')
 if quit != 'y':

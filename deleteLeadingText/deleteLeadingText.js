@@ -8,10 +8,13 @@ Command line: node scriptName fileWithAllLinks [Optional: output destination]
 const fs = require('fs');
 const path = require('path');
 
+const {bookmarksRootDir, mobileLinksDir} = require('./config.json');
+
 const config = {
   title: '## MOBILE BOOKMARKS',
-  outputFilePath: '/Users/davecohen/Dropbox/Notes/Programming-DB/-BookmarkProject/-Links-Private/MobileLinks',
-  outputMessage: 'Your file has been written: '
+  outputFilePath: path.join(bookmarksRootDir, mobileLinksDir),
+  outputMessage: 'Your file has been written: ',
+  extension: '-mobile.md'
 };
 
 const inputFilePath = process.argv[2];
@@ -20,7 +23,7 @@ const inputFilePath = process.argv[2];
 const outputFilePath = process.argv[3] || config.outputFilePath;
 
 const dateAndExtension = inputFilePath.slice(-9);
-const outputFilename = dateAndExtension.slice(0, 6) + '-mobile.md';
+const outputFilename = dateAndExtension.slice(0, 6) + config.extension;
 const fullOutputPath = path.join(outputFilePath, outputFilename);
 
 // console.log(outputFilename, outputFilePath);

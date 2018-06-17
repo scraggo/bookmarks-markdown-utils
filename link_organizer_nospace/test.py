@@ -14,7 +14,7 @@ todoTxt = \
 '''
 
 def test_visit_link():
-    global todoTxt
+    # global todoTxt
     t = todoTxt.split('\n')
     test = App(t)
     for line in t:

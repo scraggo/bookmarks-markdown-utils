@@ -9,7 +9,7 @@ Created on 4/26/17, 11:18 AM
 Title: Convert Firefox Backup (JSON) to Dave's Custom Markdown
 
 """
-import os, sys, re
+import os, sys, re, json
 
 def deleter(str):
     str = str\
@@ -27,13 +27,15 @@ def replacer(str):
 
 
 textfile = input('Path to Firefox backup JSON file:')
-# textfile = '/Users/davecohen/Library/Application Support/Google/Chrome/Default/Bookmarks'
+
 print('Copying: ' + textfile)
 
-# don't need?
-# textfile = textfile.split('\n')
+config = None
+with open("config.json", "r") as read_file:
+    config = json.load(read_file)
 
-outputlocation = os.path.join('/Users/davecohen/Dropbox/Notes/-BookmarkProject', '--firefox-date.md')
+outputlocation = os.path.join(config['outputDir'], '--firefox-date.md')
+
 print('Save to ' + outputlocation + '?')
 quit = input('Press y if ok. If not ok, press enter. ')
 if quit != 'y':

@@ -57,13 +57,13 @@ some service
 '''
 
 def test_block_encoder():
-    global ORG_LINKS
+    # global ORG_LINKS
     text = ORG_LINKS
     app = App(text)
     pprint(app.encoded_list)
 
 def test_return_sorted():
-    global ORG_LINKS
+    # global ORG_LINKS
     text = ORG_LINKS
     app = App(text)
     print(app.return_sorted())
