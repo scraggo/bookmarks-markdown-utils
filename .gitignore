@@ -7,3 +7,9 @@ old
 
 *.pyc
 __pycache__/
+
+# config (created with script)
+
+*/chr_config.py
+*/config.json
+

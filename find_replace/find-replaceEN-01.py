@@ -23,7 +23,7 @@ SAVE OUTPUT TO HTML FILE
 <div> and </div>
 empty space
 """
-import os
+import os, json
 
 def deleter(str):
     str = str\
@@ -44,12 +44,15 @@ def replacer(str):
 
 print('Paste path to cleaned HTML (txt) file here:')
 textfile = input('')
-# textfile = '/Users/davecohen/Dropbox/Notes/-BookmarkProject/BookmarkExports/bookmarks_4_26_17.html'
 
 # don't need?
 # textfile = textfile.split('\n')
 
-outputlocation = os.path.join('/Users/davecohen/Dropbox/Notes/-BookmarkProject', '-pythonclean.html')
+config = None
+with open("config.json", "r") as read_file:
+    config = json.load(read_file)
+
+outputlocation = os.path.join(config['outputDir'], '-pythonclean.html')
 output = open(outputlocation, 'w')
 
 with open(textfile) as f:

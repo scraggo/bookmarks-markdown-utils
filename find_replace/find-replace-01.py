@@ -26,6 +26,7 @@ replace </dt> with </li>
 replace empty tags
 """
 import os
+import json
 
 def deleter(str):
     str = str                   \
@@ -46,12 +47,15 @@ def replacer(str):
 
 print('Paste path to cleaned HTML (txt) file here:')
 textfile = input('')
-# textfile = '/Users/davecohen/Dropbox/Notes/-BookmarkProject/BookmarkExports/bookmarks_4_26_17.html'
 
 # don't need?
 # textfile = textfile.split('\n')
 
-outputlocation = os.path.join('/Users/davecohen/Dropbox/Notes/-BookmarkProject', 'outputfile.html')
+config = None
+with open("config.json", "r") as read_file:
+    config = json.load(read_file)
+
+outputlocation = os.path.join(config['outputDir'], 'outputfile.html')
 output = open(outputlocation, 'a')
 
 with open(textfile) as f:
