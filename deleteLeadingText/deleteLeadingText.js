@@ -28,6 +28,10 @@ const fullOutputPath = path.join(outputFilePath, outputFilename);
 
 // console.log(outputFilename, outputFilePath);
 
+if (fs.existsSync(fullOutputPath)) {
+  throw Error('File exists: ' + fullOutputPath);
+}
+
 const writeToFile = () => {
   let found = false;
   fs.readFileSync(inputFilePath).toString().split('\n')
@@ -39,6 +43,10 @@ const writeToFile = () => {
   });
 };
 
-Promise.resolve(writeToFile()).then(() => {
-  console.log('\n\n' + config.outputMessage + fullOutputPath);
-}).catch(console.error);
+// Promise.resolve(writeToFile()).then(() => {
+//   console.log('\n\n' + config.outputMessage + fullOutputPath);
+// }).catch(console.error);
+
+writeToFile();
+console.log('\n\n' + config.outputMessage + fullOutputPath);
+
