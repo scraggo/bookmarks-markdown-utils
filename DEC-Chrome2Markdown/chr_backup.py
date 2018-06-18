@@ -1,14 +1,9 @@
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 '''
 chr_backup.py
 Purpose: backs up the Chrome JSON 'Backup' file and adds date to it.
-Dependencies:
-    chr_config.py
-    chr_path.py
-    date_append.py
-This file can be run independently of chr2mkdown.
+This file can be run independently.
 '''
 
 #Standard library:
