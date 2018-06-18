@@ -19,15 +19,25 @@ class FileUtils:
     if os.path.exists(filePath):
       raise OSError(filePath + ' file exists.')
 
-  def join_path(self, top_dir):
-    return os.path.join(directories['bookmarksRootDir'], top_dir)
+  def join_path(self, top_dir, root_dir = None):
+    if not root_dir:
+      root_dir = directories['bookmarksRootDir']
+    return os.path.join(root_dir, top_dir)
 
-  def copy_rename_file(self, top_dir, input_file_path, new_file_name = False):
-    output = self.join_path(directories[top_dir])
-    if new_file_name:
-      output = os.path.join(output, new_file_name)
-    self.fileExists(output)
-    return shutil.copy(input_file_path, output)
+  def copy_file(self, file_path, new_dir ):
+    fileName = os.path.split(file_path)[1]
+    self.fileExists(os.path.join(new_dir, fileName))
+    return shutil.copy(file_path, new_dir)
+
+  # def rename_file(self, input_file_path, new_file_name):
+  #   output = self.join_path(directories[top_dir])
+  #   self.fileExists(output)
+  #   # print(input_file_path, output)
+  #   shutil.copy(input_file_path, output)
+  #   if new_file_name:
+  #     new_output = os.path.join(output, new_file_name)
+  #   self.fileExists(new_output)
+  #   return os.rename(output, new_output)
 
   def move_to_mobileLinksDir(self, input_file_path):
     output = self.join_path(directories['mobileLinksDir'])
@@ -38,4 +48,10 @@ class FileUtils:
     return shutil.copy(input_file_path, output)
 
   def copy_to_chrJsonBackupsDir(self, input_file_path, new_file_name):
-    return self.copy_rename_file('chrJsonBackupsDir', input_file_path, new_file_name)
+    newDest = self.join_path(directories['chrJsonBackupsDir'])
+    # oldFileName = os.path.split(input_file_path)[1]
+    # self.copy_file(input_file_path, newDest)
+    oldNameNewDest = self.copy_file(input_file_path, newDest)
+    newFilePath = os.path.join(newDest, new_file_name)
+    os.rename(oldNameNewDest, newFilePath)
+    return newFilePath
