@@ -4,14 +4,14 @@ Suite of command-line tools for Chrome bookmark management. Designed for users w
 
 Note: the configuration files are not included. They can be created with the schema below.
 
-## `DEC-Chr2Markdown`
+## DEC-Chr2Markdown
 
 Purpose:
 - Backup Chrome 'Bookmarks' file to directory in config file.
 - Convert file to markdown format.
 
-### Necessary: Create the following configuration file:
-`chr_config.py`:
+**Necessary: Create the following configuration file:**
+'chr_config.py':
 ```
 directories = {
   "bookmarksRootDir": {{ ROOT DIRECTORY }},
@@ -29,10 +29,10 @@ node_scripts = {
 }
 ```
 
-## `deleteLeadingText`
+## deleteLeadingText
 
-### Necessary: Create the following configuration file:
-`config.json`:
+**Necessary: Create the following configuration file:**
+'config.json':
 ```
 {
   "bookmarksRootDir": {{ ROOT DIRECTORY }},
@@ -42,10 +42,10 @@ node_scripts = {
 }
 ```
 
-## `find_replace`
+## find_replace
 
-### Necessary: Create the following configuration file:
-`config.json`:
+**Necessary: Create the following configuration file:**
+'config.json':
 ```
 {
   "inputFile": {{ FILE TO PROCESS }},
