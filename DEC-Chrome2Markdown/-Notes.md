@@ -1,3 +1,14 @@
+## 180618
+
+TO ADD
+- tests
+- gui (tKinter? or browser?)
+
+today
+- Fixed copy - rename bug
+- added prevention to append to md file
+- added tests. to add more!
+
 ## 180617
 
 Splitting a lot of functions into little functions.
