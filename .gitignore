@@ -10,7 +10,7 @@ old
 */chr_config.py
 */config.json
 
-
+.pytest_cache/
 
 
 # Byte-compiled / optimized / DLL files
