@@ -1,5 +1,5 @@
 /*
-In a new file, only include `## MOBILE BOOKMARKS` and text afterwards.
+This script is called after chrome-to-markdown. It copies the markdown file to a new directory and removes all the text above `## MOBILE BOOKMARKS`.
 
 Usage:
 Command line: node scriptName fileWithAllLinks [Optional: output destination]
