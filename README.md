@@ -2,11 +2,12 @@
 
 Suite of command-line tools for Chrome bookmark management. Designed for users who want to store bookmark files in markdown format instead of managing a large collection inside of Chrome.
 
-Note: the configuration files are not included. They can be created with the schema below.
+Note: the configuration files are not included. They should be created inside their respective project directories with the schema below.
 
 ## DEC-Chr2Markdown
 
 Purpose:
+
 - Backup Chrome 'Bookmarks' file to directory in config file.
 - Convert file to markdown format.
 
