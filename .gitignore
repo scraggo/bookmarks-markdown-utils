@@ -1,14 +1,17 @@
 
 .vscode/
 
-# directories
+# directories / files
 reference
 old/
+-Notes.md
 
 # config (created with script)
 
 */chr_config.py
 */config.json
+
+
 
 .pytest_cache/
 

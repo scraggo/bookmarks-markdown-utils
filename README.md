@@ -1,6 +1,6 @@
 # Bookmarks Project
 
-Suite of command-line tools for Chrome bookmark management. Designed for users who want to store bookmark files in markdown format instead of managing a large collection inside of Chrome.
+Suite of command-line tools for Chrome bookmark management. (There is some functionality for OneTab and FireFox.) Designed for users who want to store bookmark files in markdown format instead of managing a large collection inside of Chrome.
 
 Note: the configuration files are not included. They should be created inside their respective project directories with the schema below.
 
