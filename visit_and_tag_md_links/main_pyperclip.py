@@ -1,5 +1,7 @@
 import pyperclip
 
+from visit_and_tag_md_links import App
+
 def main():
     print('Copy your markdown links to clipboard, enter when done:')
     input('> ')
@@ -7,13 +9,7 @@ def main():
     todoArray = todoTxt.split('\n')
     links = App(todoArray)
     links.block_encoder()
-
-    ### encapsulate in an App method:
-    headerList = list(set(links.header_list))
-    headerList.sort()
-    headerList = ', '.join(headerList)
-    ##################################
-
+    headerList = links.get_sorted_headers()
     allLinks = links.return_sorted()
     pyperclip.copy(headerList + '\n\n' + allLinks)
     print('\n'*12)
