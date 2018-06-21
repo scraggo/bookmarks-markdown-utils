@@ -1,18 +1,20 @@
 # Bookmarks Project
 
-Suite of command-line tools for Chrome bookmark management. (There is some functionality for OneTab and FireFox.) Designed for users who want to store bookmark files in markdown format instead of managing a large collection inside of Chrome.
+Suite of command-line tools for Chrome bookmark management. (There is some functionality for OneTab and FireFox.) Designed for users who:
 
-Note: the configuration files are not included. They should be created inside their respective project directories with the schema below.
+- Are tired of managing a large collection inside of Chrome.
+- Use Chrome for both Desktop and Mobile bookmarking (and mainly use the "Mobile Bookmarks" folder)
+- Want to convert bookmarks into individual markdown files
+- Want a way to visit a site and tag the bookmark with minimal mouse movement
+- ...and more
 
-## DEC-Chr2Markdown
+Note: the configuration file needs to be created with the instructions below:
 
-Purpose:
+- `cd setup/`
+- `python setup.py`
+- `open ../config.json` to open file for editing.
+- Replace given directories with your own.
 
-- Backup Chrome 'Bookmarks' file to directory in config file.
-- Convert file to markdown format.
-
-**Necessary: Create the following configuration file:**
-'chr_config.py':
 ```
 directories = {
   "bookmarksRootDir": {{ ROOT DIRECTORY }},
@@ -30,18 +32,16 @@ node_scripts = {
 }
 ```
 
+## chrome-to-markdown
+
+Purpose:
+
+- Backup Chrome 'Bookmarks' file to directory in config file.
+- Convert file to markdown format.
+- Copy mobile bookmarks to separate file.
+
 ## deleteLeadingText
 
-**Necessary: Create the following configuration file:**
-'config.json':
-```
-{
-  "bookmarksRootDir": {{ ROOT DIRECTORY }},
-  "mobileLinksDir": {{ DIRECTORY INSIDE ROOT DIRECTORY }},
-  "markdownBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY }},
-  "chrJsonBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY }},
-}
-```
 
 ## find_replace
 
