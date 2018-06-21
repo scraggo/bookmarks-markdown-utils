@@ -3,7 +3,6 @@ import os, sys, json
 from visit_and_tag_md_links import App
 
 # this import only works if you're in this directory
-sys.path.insert(0, '../chrome_to_markdown')
 sys.path.insert(0, '../utils')
 import file_utils
 from get_config import get_json_config
@@ -27,13 +26,13 @@ def get_new_filepath(old_file):
   import os
   filename, file_extension = os.path.splitext(old_file)
   new_filename = filename + get_timestamp() + file_extension
-  debug(
-    {
-      "filename": filename,
-      "file_extension": file_extension,
-      "new_filename": new_filename,
-    }
-  )
+  # debug(
+  #   {
+  #     "filename": filename,
+  #     "file_extension": file_extension,
+  #     "new_filename": new_filename,
+  #   }
+  # )
   return new_filename
 
 def write_sorted_file(new_filename, header_str, links_list):

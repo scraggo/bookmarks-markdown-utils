@@ -1,6 +1,9 @@
-import pytest, shutil, os
+import pytest, shutil, os, sys
 
+# this import only works if you're in this directory
+sys.path.insert(0, '../utils')
 from file_utils import FileUtils
+
 fUtil = FileUtils()
 
 cwd = os.getcwd()

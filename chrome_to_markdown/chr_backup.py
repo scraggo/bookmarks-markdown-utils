@@ -8,12 +8,14 @@ This file can be run independently.
 
 #Standard library:
 import os, sys, shutil
-#Local modules:
-from chr_config import directories
-import date_append as DA
-import chr_path
-from file_utils import FileUtils
 
+#Local modules:
+from . import chr_path
+
+# this import only works if you're in this directory
+sys.path.insert(0, '../utils')
+import date_append as DA
+from file_utils import FileUtils
 
 def chrBackup():
     '''
