@@ -1,4 +1,4 @@
-#chr2mkdown.py
+#chrome_to_markdown.py
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -8,12 +8,6 @@ Created on 4/26/17, 11:18 AM
 
 Title: Convert Chrome Bookmarks JSON file to Markdown
     and backup Chrome Bookmarks
-
-Dependencies:
-    chr_backup.py
-    chr_config.py
-    chr_path.py
-    date_append.py
 
 Output Format:
 * [UPS: Register](https://www.ups.com/one-to-one/login) | [https://www.ups.com/one-to-one/login](https://www.ups.com/one-to-one/login)
@@ -27,16 +21,22 @@ delete: "type": "url",
 replace: 
 "name": with [ ]
 "url": with ( )
-
-
 """
+
 #Standard library:
 import os, sys, re, shutil
+
 #Local modules:
-import chr_config as config
+from chr_path import getChromeJSON
+
+# this import only works if you're in this directory
+sys.path.insert(0, '../utils')
 import date_append as DA
 from file_utils import FileUtils
-from chr_path import getChromeJSON
+from get_config import get_json_config
+
+config = get_json_config()
+
 
 fileUtils = FileUtils()
 
@@ -71,7 +71,7 @@ class MarkdownCreator:
         return True
 
     def create_output_path(self):
-        md_oTemp = os.path.join(config.directories['bookmarksRootDir'], config.directories['markdownBackupsDir'], config.filenames['chr_md_file_prefix'])
+        md_oTemp = os.path.join(config['directories']['bookmarksRootDir'], config['directories']['markdownBackupsDir'], config['filenames']['chr_md_file_prefix'])
         self.md_output = DA.date_append(md_oTemp)
 
     def write_bookmarks_to_file(self, _chrJSON):

@@ -1,4 +1,3 @@
-#chr2mkdown.py
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -9,12 +8,6 @@ Created on Sat Jun 16 2018
 
 Title: Convert Chrome Bookmarks JSON file to Markdown
     and backup Chrome Bookmarks
-
-Dependencies:
-    chr_backup.py
-    chr_config.py
-    chr_path.py
-    date_append.py
 
 Output Format:
 * [UPS: Register](https://www.ups.com/one-to-one/login) | [https://www.ups.com/one-to-one/login](https://www.ups.com/one-to-one/login)
@@ -32,13 +25,18 @@ replace:
 """
 
 #Standard library:
-import os
-import subprocess
+import os, sys, subprocess
 
 from chr_backup import chrBackup
-from chr2mkdown import MarkdownCreator
+from chrome_to_markdown import MarkdownCreator
 from move_files import move_files
-import chr_config
+
+# this import only works if you're in this directory
+sys.path.insert(0, '../utils')
+from get_config import get_json_config
+
+config = get_json_config()
+
 
 def test_things():
   md_creator = MarkdownCreator()
@@ -58,7 +56,7 @@ def main():
   # path, file_name = os.path.split(new_file_path)
   # print('Split up the path and file name:\n', path, file_name)
   # move_files(new_file_path)
-  subprocess.run(['node', chr_config.node_scripts['deleteLeadingText'], new_file_path])
+  subprocess.run(['node', config['node_scripts']['deleteLeadingText'], new_file_path])
 
 
 if __name__ == '__main__':
