@@ -30,8 +30,9 @@ class App:
     def __init__(self, in_list):
         self.in_list = in_list
         self.data_blocks = []
-        self.header_list = []
+        self.organized_list = []
         self.header_map = {}
+        self.remaining_list = []
         self.DEFAULT_CHAR = '~~~NoTag~~~'
 
     def block_encoder(self):
@@ -54,32 +55,36 @@ class App:
                 headerIn = self.header_input()
                 if headerIn.lower() == '.quit':
                     # append remaining lines to data blocks
-                    self.append_remaining_lines(line_num_w_data, line_num)
+                    # self.append_remaining_lines(line_num_w_data, line_num)
+                    self.get_remaining_lines(line_num)
                     break
                 elif headerIn == '':
                     self.update_header_and_data(self.header_map, self.DEFAULT_CHAR, self.data_blocks, line)
                 else:
                     self.update_header_and_data(self.header_map, headerIn, self.data_blocks, line)
 
-        self.header_list = self.sort_data_list(self.data_blocks)
+        self.organized_list = self.sort_data_list(self.data_blocks)
 
     @staticmethod
     def pprintObj(obj):
         import pprint
         pprint.pprint(obj)
 
-    def append_remaining_lines(self, line_num_w_data, line_num):
-        emptyHeaderIdx = self.header_map.get(self.DEFAULT_CHAR, -1)
-        if emptyHeaderIdx == -1:
-            self.data_blocks.append({
-                'header': self.DEFAULT_CHAR,
-                'data': []
-            })
-            emptyHeaderIdx = len(self.data_blocks) - 1
-            # print(emptyHeaderIdx, line_num_w_data)
-            # print(self.in_list[line_num:line_num+3])
-            # print(self.data_blocks[emptyHeaderIdx])
-        self.data_blocks[emptyHeaderIdx]['data'] += self.in_list[line_num:]
+    # def append_remaining_lines(self, line_num_w_data, line_num):
+    #     emptyHeaderIdx = self.header_map.get(self.DEFAULT_CHAR, -1)
+    #     if emptyHeaderIdx == -1:
+    #         self.data_blocks.append({
+    #             'header': self.DEFAULT_CHAR,
+    #             'data': []
+    #         })
+    #         emptyHeaderIdx = len(self.data_blocks) - 1
+    #         # print(emptyHeaderIdx, line_num_w_data)
+    #         # print(self.in_list[line_num:line_num+3])
+    #         # print(self.data_blocks[emptyHeaderIdx])
+    #     self.data_blocks[emptyHeaderIdx]['data'] += self.in_list[line_num:]
+    
+    def get_remaining_lines(self, line_num):
+      self.remaining_list = self.in_list[line_num:]
 
     @staticmethod
     def update_header_and_data(obj, header, dataList, data):
@@ -144,7 +149,7 @@ class App:
             return sorted_r
 
     def get_sorted_headers(self, string = True):
-        # headerList = list(set(self.header_list))
+        # headerList = list(set(self.organized_list))
         headerList = sorted(self.header_map.keys())
         if string:
             return ', '.join(headerList)

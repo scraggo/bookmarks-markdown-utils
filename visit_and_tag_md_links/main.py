@@ -20,7 +20,8 @@ def get_file_arr(file_path):
 
 def get_timestamp():
   import time
-  return str(int(time.time() * 100))
+  time.sleep(.01)
+  return str(int(time.time() * 1000))[4:]
 
 def get_new_filepath(old_file):
   import os
@@ -42,7 +43,13 @@ def write_sorted_file(new_filename, header_str, links_list):
       new_file.write('\n\n' + obj['header'] + '\n')
       for line in obj['data']:
         new_file.write(line.strip() + '\n')
-  print('File successfully written:', new_filename)
+  print('Organized links:\n\t', new_filename)
+
+def write_remaining(new_filename, remaining_list):
+  with open(new_filename, 'w') as new_file:
+    for line in remaining_list:
+      new_file.write(line)
+  print('Unorganized links:\n\t', new_filename)
 
 def main():
   global md_file
@@ -52,13 +59,17 @@ def main():
   links.block_encoder()
   headerList = links.get_sorted_headers(string = True)
   # allLinks = links.return_sorted(string = False)
-  allLinks = links.header_list
+  organizedLinks = links.organized_list
   newFileName = get_new_filepath(md_file)
   # print(headerList)
-  # print(allLinks)
+  # print(organizedLinks)
   # print(newFileName)
 
-  write_sorted_file(newFileName, headerList, allLinks)
+  write_sorted_file(newFileName, headerList, organizedLinks)
+
+  newFileName2 = get_new_filepath(md_file)
+  remainingList = links.remaining_list
+  write_remaining(newFileName2, remainingList)
 
 if __name__ == '__main__':
   main()

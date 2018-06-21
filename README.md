@@ -2,7 +2,7 @@
 
 Suite of command-line tools for Chrome bookmark management. (There is some functionality for OneTab and FireFox.) Designed for users who:
 
-- Are tired of managing a large collection inside of Chrome.
+- Are tired of managing a large bookmark collection inside of Chrome.
 - Use Chrome for both Desktop and Mobile bookmarking (and mainly use the "Mobile Bookmarks" folder)
 - Want to convert bookmarks into individual markdown files
 - Want a way to visit a site and tag the bookmark with minimal mouse movement
