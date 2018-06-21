@@ -31,32 +31,73 @@ class App:
         self.in_list = in_list
         self.data_blocks = []
         self.header_list = []
+        self.header_map = {}
+        self.DEFAULT_CHAR = '~~~NoTag~~~'
 
     def block_encoder(self):
         '''Given bookmarks in markdown format (as list), a list of dicts with header and data is returned.
         '''
         # blocks = [list(g[1]) for g in itertools.groupby(todoArray, key= lambda x: x.strip() != '') if g[0]]
 
+        line_num_w_data = -1
+        line_num = -1
         for line in self.in_list:
+            line_num += 1
+            line = line.strip()
             if len(line) <= 0:
                 continue
             if line[0] == '*':
+                line_num_w_data += 1
                 self.visit_link(line)
                 print(line)
-                #add a custom header or hit enter to add a default zzzzz
+                #add a custom header or hit enter to add DEFAULT
                 headerIn = self.header_input()
-                if headerIn not in ['', 'quit']:
-                    self.header_list.append(headerIn)
-                    self.data_blocks.append({'header': headerIn, 'data': line})
-                elif headerIn == '':
-                    self.data_blocks.append({'header': 'zzzzz', 'data': line})
-                elif headerIn.lower() == 'quit':
+                if headerIn.lower() == '.quit':
+                    # append remaining lines to data blocks
+                    self.append_remaining_lines(line_num_w_data, line_num)
                     break
-        # print() #debug
-        #sort and overwrite dataBlocks...
-        self.data_blocks = sorted(self.data_blocks, key=lambda k: k['header'].lower())
-        # return dataBlocks
-        # pprint(dataBlocks)
+                elif headerIn == '':
+                    self.update_header_and_data(self.header_map, self.DEFAULT_CHAR, self.data_blocks, line)
+                else:
+                    self.update_header_and_data(self.header_map, headerIn, self.data_blocks, line)
+
+        self.header_list = self.sort_data_list(self.data_blocks)
+
+    @staticmethod
+    def pprintObj(obj):
+        import pprint
+        pprint.pprint(obj)
+
+    def append_remaining_lines(self, line_num_w_data, line_num):
+        emptyHeaderIdx = self.header_map.get(self.DEFAULT_CHAR, -1)
+        if emptyHeaderIdx == -1:
+            self.data_blocks.append({
+                'header': self.DEFAULT_CHAR,
+                'data': []
+            })
+            emptyHeaderIdx = len(self.data_blocks) - 1
+            # print(emptyHeaderIdx, line_num_w_data)
+            # print(self.in_list[line_num:line_num+3])
+            # print(self.data_blocks[emptyHeaderIdx])
+        self.data_blocks[emptyHeaderIdx]['data'] += self.in_list[line_num:]
+
+    @staticmethod
+    def update_header_and_data(obj, header, dataList, data):
+        if obj.get(header, False) is False:
+            idx = len(dataList)#last available idx
+            obj[header] = idx
+            newObj = {
+                'header': header,
+                'data': [data]
+            }
+            dataList.append(newObj)
+        else:
+            idx = obj[header]
+            dataList[idx]['data'].append(data)
+
+    @staticmethod
+    def sort_data_list(data_list):
+        return sorted(data_list, key=lambda k: k['header'].lower())
 
     def visit_link(self, str_url):
         # FYI - link regex - (https?\:\/\/[^)]*)
@@ -68,7 +109,7 @@ class App:
 
     @staticmethod
     def header_input():
-        print('Type in a header - optional. \'Quit\' to stop.')
+        print('Type in a header - optional. \'.quit\' to stop.')
         headerIn = input('> ').lower()
         return headerIn
 
@@ -84,7 +125,7 @@ class App:
             #         print(line)
             print()
 
-    def return_sorted(self):
+    def return_sorted(self, string = True):
         #return sorted data for pyperclip
         sorted_r = []
 
@@ -97,5 +138,17 @@ class App:
             #         print(line)
             sorted_r.append('')
 
-        return '\n'.join(sorted_r)
+        if string:
+            return '\n'.join(sorted_r)
+        else:
+            return sorted_r
+
+    def get_sorted_headers(self, string = True):
+        # headerList = list(set(self.header_list))
+        headerList = sorted(self.header_map.keys())
+        if string:
+            return ', '.join(headerList)
+        else:
+            return headerList
+
 
