@@ -10,17 +10,12 @@ usage:
 'python find_replace_clean_html.py <html file> [<output path>]'
 
 Title: Find / Replace in HTML
-
-Description:
-This script finds and replaces or removes certain html tags.
-It can be ran after
-- exporting a bookmarks.html file from Chrome
-- "clearning" html (I used https://html-cleaner.com/)
 """
 import os, json, sys
 
 from replacer import replacer
 from create_file import create_file
+from get_args import get_args
 
 # this import only works if you're in this directory
 sys.path.insert(0, '../utils')
@@ -53,15 +48,28 @@ def get_replaced_line(line):
     return replaced + '\n'
 
 def main():
-    html_file = sys.argv[1]
+    description_str = '''This script finds and replaces or removes certain html tags.
+It can be ran after
+- exporting a bookmarks.html file from Chrome
+- "clearning" html (I used https://html-cleaner.com/)'''
 
-    config = get_json_config()
+    args = get_args(
+        description_str,
+        {
+            "flag": "html_file",
+            "help": "chrome html file"
+        },
+        {
+            "flag": "-o",
+            "help": "full output file path and name"
+        }
+        )
 
-    user_output_path = sys.argv[2]
-    if user_output_path:
-        outputlocation = user_output_path
-    else:
+    html_file = args.html_file
+    output_location = args.o
+    if not output_location:
         output_filename = 'chrome_output.html'
+        config = get_json_config()
         outputlocation = os.path.join(config['directories']['bookmarksRootDir'], output_filename)
 
     write_mode = 'w'

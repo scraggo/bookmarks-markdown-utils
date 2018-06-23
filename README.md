@@ -23,7 +23,6 @@ directories = {
   "chrJsonBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
   "combinedFiles": {{ DIRECTORY INSIDE ROOT DIRECTORY  or '' }}
   "firefoxJson": {{ *LOCATION OF FIREFOX JSON FILE }}
-
 }
 
 filenames = {
