@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import os, sys, json
 from visit_and_tag_md_links import App
@@ -7,10 +9,8 @@ sys.path.insert(0, '../utils')
 import file_utils
 from get_config import get_json_config
 
-md_file = '/Users/davecohen/Dropbox/Notes/Programming-DB/-BookmarkProject/-Links-Private/MobileLinks/171018-mobile.md'
-
 def debug(obj):
-  # {name: data}
+  '''{name: data}'''
   for name in obj.keys():
     print('{}: {}'.format(name, obj[name]))
 
@@ -27,13 +27,6 @@ def get_new_filepath(old_file):
   import os
   filename, file_extension = os.path.splitext(old_file)
   new_filename = filename + get_timestamp() + file_extension
-  # debug(
-  #   {
-  #     "filename": filename,
-  #     "file_extension": file_extension,
-  #     "new_filename": new_filename,
-  #   }
-  # )
   return new_filename
 
 def write_sorted_file(new_filename, header_str, links_list):
@@ -52,18 +45,14 @@ def write_remaining(new_filename, remaining_list):
   print('Unorganized links:\n\t', new_filename)
 
 def main():
-  global md_file
-  if len(sys.argv) > 1:
-    md_file = sys.argv[1]
+  if len(sys.argv) < 2:
+    sys.exit('error: Please enter a text/markdown filepath.')
+  md_file = sys.argv[1]
   links = App(get_file_arr(md_file))
   links.block_encoder()
   headerList = links.get_sorted_headers(string = True)
-  # allLinks = links.return_sorted(string = False)
   organizedLinks = links.organized_list
   newFileName = get_new_filepath(md_file)
-  # print(headerList)
-  # print(organizedLinks)
-  # print(newFileName)
 
   write_sorted_file(newFileName, headerList, organizedLinks)
 
