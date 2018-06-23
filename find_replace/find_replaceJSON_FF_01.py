@@ -11,61 +11,66 @@ Title: Convert Firefox Backup (JSON) to Dave's Custom Markdown
 """
 import os, sys, re, json
 
-def deleter(str):
-    str = str\
-    .replace('"type": "url",', '')
-    return str
-    
-def replacer(str):
-    str = str                  \
-    .replace('<a', '</p>\n<a')    \
-    .replace('</a>', '</a>\n - ')  \
-#     .replace('<dt>', '<li>')    \
-#     .replace('</dt>', '</li>')
-#     .replace('\n\n\n', '\n')
-    return str
+from replacer import replacer
 
+def get_replaced_line(line):
+    '''This function is file-specific
+    '''
+    to_delete = [
+        ['"type": "url",', '']
+    ]
 
-textfile = input('Path to Firefox backup JSON file:')
+    to_replace_name = [
+        ['"name": "', '* ['],
+        ['",', ']']
+    ]
 
-print('Copying: ' + textfile)
+    to_replace_paren = [
+        ['(', '['],
+        [')', ']']
+    ]
 
-config = None
-with open("config.json", "r") as read_file:
-    config = json.load(read_file)
+    line = replacer(to_delete, line)
+    if line.startswith('"name"'):
+        return replacer(to_replace_name, line)
+    elif line.startswith('"url"'):
+        if 'chrome-extension://' in line:
+            line = re.sub(r"chrome-extension://([a-z])+/suspended.html#uri=", "", line)
+        line = line.replace('"url": "', '(')
+        line_paren = line.replace('"', ')')
+        line = line_paren + ' | ' + replacer(to_replace_paren, line_paren) + line_paren
+        return line + '\n'
+    return ''
 
-outputlocation = os.path.join(config['outputDir'], '--firefox-date.md')
+def main():
+    textfile = input('Path to Firefox backup JSON file:')
 
-print('Save to ' + outputlocation + '?')
-quit = input('Press y if ok. If not ok, press enter. ')
-if quit != 'y':
-    sys.exit('Quitting.')
+    print('Copying: ' + textfile)
 
-output = open(outputlocation, 'w')
+    config = None
+    with open("config.json", "r") as read_file:
+        config = json.load(read_file)
 
-with open(textfile) as f:
-    for line in f:
-        line = line.strip()
-        line = deleter(line)
-        if line.startswith('"name"'):
-            line = line.replace('"name": "', '* [')
-            line = line.replace('",', ']')
+    outputlocation = os.path.join(config['outputDir'], '--firefox-date.md')
+
+    print('Save to ' + outputlocation + '?')
+    quit = input('Press y if ok. If not ok, press enter. ')
+    if quit != 'y':
+        sys.exit('Quitting.')
+
+    output = open(outputlocation, 'w')
+
+    with open(textfile) as f:
+        for line in f:
+            line = line.strip()
+            line = get_replaced_line(line)
             output.write(line)
-        elif line.startswith('"url"'):
-            if 'chrome-extension://' in line:
-                line = re.sub(r"chrome-extension://([a-z])+/suspended.html#uri=", "", line)
-            line = line.replace('"url": "', '(')
-            line_paren = line.replace('"', ')')
-            line = line_paren + ' | ' + line_paren.replace('(', '[').replace(')', ']') + line_paren
-#             print(replacer(line))
-            output.write(line + '\n')
-output.close()
-print('Output to:', outputlocation)
 
-# for line in textfile:
-#     print(line)
-#     print(replacer(line))
-    
+    output.close()
+    print('Output to:', outputlocation)
+
+if __name__ == '__main__':
+    main()    
 
 '''
 line = re.sub(r"chrome-extension://([a-z])+/suspended.html#uri=", "", line)

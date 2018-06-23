@@ -25,22 +25,33 @@ empty space
 """
 import os, json
 
-def deleter(str):
-    str = str\
-    .replace('<div> </div>', '')\
-    .replace('<p></p>', '')     \
-    .replace('<div>', '')       \
-    .replace('</div>', '')
-    return str
+from replacer import replacer
+
+def get_replaced_line(line):
+    '''This function is file-specific
+    '''
+    to_delete = [
+        ['<div> </div>', ''],
+        ['<p></p>', ''],
+        ['<div>', ''],
+        ['</div>', '']
+    ]
+        
+    to_replace = [
+        ['<a', '</p>\n<a'],
+        ['</a>', '</a>\n - ']
+    ]
+    if line == '':
+      return line
     
-def replacer(str):
-    str = str                  \
-    .replace('<a', '</p>\n<a')    \
-    .replace('</a>', '</a>\n - ')  \
-#     .replace('<dt>', '<li>')    \
-#     .replace('</dt>', '</li>')
-#     .replace('\n\n\n', '\n')
-    return str
+    line = line.replace('<div><br/>', '<p>')
+    line = replacer(to_delete, line)
+    line = line.strip()
+
+    if line == '':
+      return line
+    
+    return replacer(to_replace, line) + '\n'
 
 print('Paste path to cleaned HTML (txt) file here:')
 textfile = input('')
@@ -58,12 +69,9 @@ output = open(outputlocation, 'w')
 with open(textfile) as f:
     for line in f:
         line = line.strip()
-        line = line.replace('<div><br/>', '<p>')
-        line = deleter(line)
-        line = line.strip()
-        if line != '':
-#             print(replacer(line))
-            output.write(replacer(line)+'\n')
+        line = get_replaced_line(line)
+        output.write(line)
+
 output.close()
 print('Output to:', outputlocation)
 
