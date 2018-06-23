@@ -6,12 +6,17 @@ Created on 4/26/17, 11:18 AM
 
 @author: davecohen
 
-Title: Convert Firefox Backup (JSON) to Dave's Custom Markdown
+Title: Convert Firefox Backup (JSON) to Markdown Links
 
 """
 import os, sys, re, json
 
 from replacer import replacer
+from create_file import create_file
+
+# this import only works if you're in this directory
+sys.path.insert(0, '../utils')
+from get_config import get_json_config
 
 def get_replaced_line(line):
     '''This function is file-specific
@@ -43,39 +48,25 @@ def get_replaced_line(line):
     return ''
 
 def main():
-    textfile = input('Path to Firefox backup JSON file:')
+    # get paths
+    config = get_json_config()
+    # load firefox json file
+    with open(config['directories']['firefoxJson'], encoding='utf-8') as data_file:    
+        data = json.loads(data_file.read())
 
-    print('Copying: ' + textfile)
+    ff_json_list = str(data).split(', ')
 
-    config = None
-    with open("config.json", "r") as read_file:
-        config = json.load(read_file)
+    output_filename = 'firefox_output.html'
+    outputlocation = os.path.join(config['directories']['bookmarksRootDir'], output_filename)
 
-    outputlocation = os.path.join(config['outputDir'], '--firefox-date.md')
 
-    print('Save to ' + outputlocation + '?')
-    quit = input('Press y if ok. If not ok, press enter. ')
-    if quit != 'y':
-        sys.exit('Quitting.')
+    if os.path.exists(outputlocation):
+            print('Save over ' + outputlocation + '?')
+            quit = input('Press y if ok. If not ok, press enter. ')
+            if quit.lower() != 'y':
+                sys.exit('Quitting.')
 
-    output = open(outputlocation, 'w')
-
-    with open(textfile) as f:
-        for line in f:
-            line = line.strip()
-            line = get_replaced_line(line)
-            output.write(line)
-
-    output.close()
-    print('Output to:', outputlocation)
+    create_file(outputlocation, 'w', ff_json_list, get_replaced_line)
 
 if __name__ == '__main__':
     main()    
-
-'''
-line = re.sub(r"chrome-extension://([a-z])+/suspended.html#uri=", "", line)
-chrome-extension://([a-z])+/suspended.html#uri=
-suspRegex = re.compile(r'chrome-extension://([a-z])+/suspended.html#uri=')
-suspRegex.sub('CENSORED', 'Agent Alice gave the secret documents to Agent Bob.')
-
-'''

@@ -22,6 +22,8 @@ directories = {
   "markdownBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
   "chrJsonBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
   "combinedFiles": {{ DIRECTORY INSIDE ROOT DIRECTORY  or '' }}
+  "firefoxJson": {{ *LOCATION OF FIREFOX JSON FILE }}
+
 }
 
 filenames = {
@@ -32,6 +34,8 @@ node_scripts = {
   'deleteLeadingText': {{ PATH TO deleteLeadingText }}
 }
 ```
+
+\* Firefox JSON file location (Mac): "~/Library/Application Support/Google/Chrome/Default/Bookmarks"
 
 ## chrome-to-markdown
 
@@ -46,14 +50,3 @@ Purpose:
 
 ## find_replace
 
-**Necessary: Create the following configuration file:**
-'config.json':
-```
-{
-  "inputFile": {{ FILE TO PROCESS }},
-  "outputDir": {{ OUTPUT DIRECTORY }},
-  "firefoxJson": { see below }
-}
-```
-
-Firefox JSON file location (Mac): "~/Library/Application Support/Google/Chrome/Default/Bookmarks"

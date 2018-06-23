@@ -6,87 +6,62 @@ Created on 4/26/17, 11:18 AM
 
 @author: davecohen
 
-Title: Convert Firefox Backup (JSON) to Dave's Custom Markdown
-
+Title: Convert Firefox Backup (JSON) to Markdown Links
 """
 import os, sys, re
 import json
 from pprint import pprint
 
+# this import only works if you're in this directory
+sys.path.insert(0, '../utils')
+from get_config import get_json_config
+
 def deleter(str):
     if str.endswith("'") or\
     str.endswith("]") or\
     str.endswith("}"):
-        return(deleter(str[:-1])) #I used recursion!
+        return(deleter(str[:-1])) # Note: this is recursive
     else:
         return str        
 
-#     str = str\
-#     .replace('"type": "url",', '')
-#     return str
-    
 def replacer(str):
     str = str                  \
     .replace('<a', '</p>\n<a')    \
-    .replace('</a>', '</a>\n - ')  \
-#     .replace('<dt>', '<li>')    \
-#     .replace('</dt>', '</li>')
-#     .replace('\n\n\n', '\n')
+    .replace('</a>', '</a>\n - ')
     return str
 
+def main():
+    # get paths
+    config = get_json_config()
 
-JSONfile = input('Path to Firefox backup JSON file:')
+    # load firefox json file
+    with open(config["firefoxJson"], encoding='utf-8') as data_file:    
+        data = json.loads(data_file.read())
 
-with open(JSONfile, encoding='utf-8') as data_file:    
-    data = json.loads(data_file.read())
+    ff_json_list = str(data).split(', ')
 
-# pprint(data)
-# print("LINE")
-dataList = str(data).split(', ')
-# print(dataList)
-# sys.exit()
+    output_filename = 'firefox_output.html'
+    outputlocation = os.path.join(config['directories']['bookmarksRootDir'], output_filename)
 
-config = None
-with open("config.json", "r") as read_file:
-    config = json.load(read_file)
+    if os.path.exists(outputlocation):
+        print('Save over ' + outputlocation + '?')
+        quit = input('Press y if ok. If not ok, press enter. ')
+        if quit.lower() != 'y':
+            sys.exit('Quitting.')
 
-outputlocation = os.path.join(config['outputDir'], '--firefox-date.md')
+    with open(outputlocation, 'w') as output:
+        for line in ff_json_list:
+            line = line.strip()
+            line = deleter(line)
+            if line[1:6] == 'title' and len(line) > 11:
+                line = '* [' + line[10:] + ']'      #was 10:-1
+                output.write(line)
+            elif line[1:4] == 'uri':
+                line = '(' + line[8:] + ')'         #was 8:-2
+                output.write(line + '\n')
 
-print('Save to ' + outputlocation + '?')
-quit = input('Press y if ok. If not ok, press enter. ')
-if quit != 'y':
-    sys.exit('Quitting.')
+    print('Output to:', outputlocation)
 
-output = open(outputlocation, 'w')
 
-for line in dataList:
-    line = line.strip()
-#     print(line) #debug
-    line = deleter(line)
-    if line[1:6] == 'title' and len(line) > 11:
-        line = '* [' + line[10:] + ']'      #was 10:-1
-#         line = line.replace('"name": "', '* [')
-#         line = line.replace('",', ']')
-        output.write(line)
-    elif line[1:4] == 'uri':
-        line = '(' + line[8:] + ')'         #was 8:-2
-#         line = line.replace('"url": "', '(')
-#         line_paren = line.replace('"', ')')
-#         line = line_paren + ' | ' + line_paren.replace('(', '[').replace(')', ']') + line_paren
-#             print(replacer(line))
-        output.write(line + '\n')
-output.close()
-print('Output to:', outputlocation)
-
-# for line in textfile:
-#     print(line)
-#     print(replacer(line))
-    
-
-'''
-line = re.sub(r"chrome-extension://([a-z])+/suspended.html#uri=", "", line)
-chrome-extension://([a-z])+/suspended.html#uri=
-suspRegex = re.compile(r'chrome-extension://([a-z])+/suspended.html#uri=')
-suspRegex.sub('CENSORED', 'Agent Alice gave the secret documents to Agent Bob.')
-
-'''
+if __name__ == '__main__':
+    main()

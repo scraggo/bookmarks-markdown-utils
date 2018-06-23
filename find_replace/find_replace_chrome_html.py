@@ -7,10 +7,7 @@ Created on 4/26/17, 11:18 AM
 @author: davecohen
 
 usage:
-'python find_replace_clean_html.py <html file> [-a APPEND]'
-
-optional:
--a      APPEND to output instead of overwrite
+'python find_replace_clean_html.py <html file> [<output path>]'
 
 Title: Find / Replace in HTML
 
@@ -23,6 +20,12 @@ It can be ran after
 import os, json, sys
 
 from replacer import replacer
+from create_file import create_file
+
+# this import only works if you're in this directory
+sys.path.insert(0, '../utils')
+from get_config import get_json_config
+
 
 def get_replaced_line(line):
     '''This function is file-specific
@@ -41,40 +44,28 @@ def get_replaced_line(line):
         ['</dt>', '</li>']
     ]
     if line == '':
-      return line
+        return line
     
     replaced = replacer(to_delete + to_replace, line)
     if replaced == '':
-      return replaced
+        return replaced
     
     return replaced + '\n'
 
-def create_file(outputlocation, write_mode, textfile, replace_func):
-    output = open(outputlocation, write_mode)
-
-    with open(textfile) as f:
-        for line in f:
-            line = line.strip()
-            line = replace_func(line)
-            output.write(line)
-    output.close()
-    print('Output to:', outputlocation)
-
 def main():
-    textfile = sys.argv[1]
+    html_file = sys.argv[1]
 
-    # add to main config.json
-    config = None
-    with open("config.json", "r") as read_file:
-        config = json.load(read_file)
+    config = get_json_config()
 
-    outputlocation = os.path.join(config['outputDir'], 'outputfile.html')
+    user_output_path = sys.argv[2]
+    if user_output_path:
+        outputlocation = user_output_path
+    else:
+        output_filename = 'chrome_output.html'
+        outputlocation = os.path.join(config['directories']['bookmarksRootDir'], output_filename)
 
     write_mode = 'w'
-    if len(sys.argv) > 2:
-        write_mode = 'a'
-
-    create_file(outputlocation, write_mode, textfile, get_replaced_line)
+    create_file(outputlocation, write_mode, html_file, get_replaced_line)
 
 if __name__ == '__main__':
     main()
