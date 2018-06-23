@@ -5,6 +5,7 @@ def replacer(arr, str):
     arr: list of lists [string to find, string to replace with]
     str: string
   Caution - watch out for unicode chars. Ex: ' ' is unicode \xa0
+    (this seems to only occur when replacers are tuples)
   """
   for item in arr:
     str = str.replace(item[0], item[1])
@@ -13,13 +14,13 @@ def replacer(arr, str):
 def run_tests():
   # quick tests
   replacers = [
-    ('<div> </div>', ''),
-    ('<p></p>', ''),
-    ('<div>', ''),
-    ('</div>', '')
+    ['<div> </div>', ''],
+    ['<p></p>', ''],
+    ['<div>', ''],
+    ['</div>', '']
   ]
   # TEST 1
-  s1 = '<div>{}</div>{}Testing!'.format(' ', '\n')
+  s1 = '<div> </div>\nTesting!'
   t1 = replacer(
     [replacers[0]],
     s1
@@ -27,7 +28,7 @@ def run_tests():
   exp1 = '\nTesting!'
   assert exp1 == t1, t1
   # TEST 2
-  s2 = '<div>{}</div>{}Testing!<p></p>P was here.<div></div>Div was here.'.format(' ', '\n')
+  s2 = '<div> </div>\nTesting!<p></p>P was here.<div></div>Div was here.'
   t2 = replacer(
     replacers[:],
     s2
