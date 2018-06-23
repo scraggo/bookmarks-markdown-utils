@@ -13,14 +13,15 @@ Note: the configuration file needs to be created with the instructions below:
 - `cd setup/`
 - `python setup.py`
 - `open ../config.json` to open file for editing.
-- Replace given directories with your own.
+- (Optional) Replace given directories with your own.
 
 ```
 directories = {
   "bookmarksRootDir": {{ ROOT DIRECTORY }},
-  "mobileLinksDir": {{ DIRECTORY INSIDE ROOT DIRECTORY }},
-  "markdownBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY }},
-  "chrJsonBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY }},
+  "mobileLinksDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
+  "markdownBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
+  "chrJsonBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
+  "combinedFiles": {{ DIRECTORY INSIDE ROOT DIRECTORY  or '' }}
 }
 
 filenames = {
