@@ -33,7 +33,7 @@ filenames = {
 
 \* Firefox JSON file location (Mac): "~/Library/Application Support/Google/Chrome/Default/Bookmarks"
 
-# Using the scripts
+### Using the scripts
 
 This is entirely written in Python 3+. Non-standard modules include:
 
@@ -42,7 +42,7 @@ This is entirely written in Python 3+. Non-standard modules include:
 
 All files are run from the project root in the command line (terminal.app, iterm.app, etc.)
 
-## chrome-to-markdown
+# chrome-to-markdown
 
 Purpose:
 
@@ -57,7 +57,7 @@ cd chrome-to-markdown
 python main.py
 ```
 
-## combine_files
+# combine_files
 
 Purpose:
 
@@ -69,11 +69,11 @@ cd combine_files
 python combine_files.py [-h] # to see necessary arguments
 ```
 
-## delete_leading_text
+# delete_leading_text
 
 Purpose:
 
-- Copy mobile bookmarks to separate file. It deletes all links before `## MOBILE BOOKMARKS`
+- Copy mobile bookmarks to separate file. It deletes all links before `# MOBILE BOOKMARKS`
 
 ```bash
 # from project root:
@@ -82,62 +82,82 @@ python delete_leading_text.py <input file name> [output file name]
 ```
 
 
-## find_replace
+# find_replace
 
 Purpose:
 
-- text
+- Given a bookmarks html file (commonly used bookmarks backup format), after all styling and classes are removed, we're left with a "clean" html file. (Cleaning is not done inside this codebase.)
+- There are multiple scripts that can be run depending on the format:
+  1. `find_replace_chrome_html.py`
+  2. `find_replace_evernote_html.py`
+  3. `find_replaceJSON_FF_01.py` (Firefox)
+  4. `find_replaceJSON_FF_02.py` (Firefox)
+- The html will be converted to markdown.
 
 ```bash
 # from project root:
 cd find_replace
-python <>
+python find_replace_<scriptname> [*input file] [*output path]
 ```
 
-## make_link
+\* Note: only 1 and 2 allow user to specify input and output paths. More documentation is inside the scripts. (<- Need to fix.)
+
+# make_link
 
 Purpose:
 
-- text
+- Given links in a few formats (plain url, Evernote), the text will be converted to markdown. 
+  1. `makelink_evernote_md.py`
+  2. `makelink_url.py`
+- More documentation is inside the scripts. (<- Need to fix.)
+- Follow program instructions for copying text to clipboard.
 
 ```bash
 # from project root:
 cd make_link
-python <>
+python makelink_<scriptname>
 ```
 
-## onetab_to_markdown
+# onetab_to_markdown
 
 Purpose:
 
-- text
+- Given links in OneTab format (the "Import/Export" option), the text will be converted to markdown. 
+- More documentation is inside the scripts. (<- Need to fix.)
+- Follow program instructions for copying text to clipboard.
 
 ```bash
 # from project root:
 cd onetab_to_markdown
-python <>
+python onetab_to_markdown.py
 ```
 
-## org_tagged_md_links
+# org_tagged_md_links
 
 Purpose:
 
-- text
+- Given links in markdown format with "tags", the grouped text will be sorted alphabetically.
+- More documentation is inside the scripts. (<- Need to fix.)
+- Follow program instructions for copying text to clipboard.
 
 ```bash
 # from project root:
 cd org_tagged_md_links
-python <>
+python org_tagged_md_links.py
 ```
 
-## visit_and_tag_md_links
+# visit_and_tag_md_links
 
 Purpose:
 
-- text
+Given links in markdown format (all links are in a markdown list, prefixed with '*'):
+
+- each link is visited in your default browser,
+- then you can "tag" the link in the terminal. (switching can be done with keyboard using CMD+TAB)
+- output format from my markdown encoder
 
 ```bash
 # from project root:
 cd visit_and_tag_md_links
-python <>
+python main.py <input filepath>
 ```

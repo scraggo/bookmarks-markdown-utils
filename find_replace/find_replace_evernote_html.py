@@ -7,7 +7,7 @@ Created on 4/26/17, 11:18 AM
 @author: davecohen
 
 usage:
-'python find_replace_clean_html.py <html file>'
+'python find_replace_clean_html.py <html file> [<output path>]'
 
 Title: Find / Replace in HTML
 """

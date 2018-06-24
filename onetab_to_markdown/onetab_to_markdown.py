@@ -7,6 +7,9 @@ Created on
 @author: davecohen
 
 Title: Onetab export to Markdown URL List element
+
+Format:
+https://example.com | site title
 """
 
 import re, string
