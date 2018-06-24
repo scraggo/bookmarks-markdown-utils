@@ -40,7 +40,7 @@ This is entirely written in Python 3+. Non-standard modules include:
 - pyperclip
 - pytest (for running tests)
 
-All files are run from the project root in the command line (terminal.app, iterm.app, etc.)
+Below are descriptions of each folder with relevant scripts and instructions for running the scripts. The instructions assume you are in the project root in your command line app of choice (terminal.app, iterm.app, etc.).
 
 # chrome-to-markdown
 
@@ -80,7 +80,6 @@ Purpose:
 cd delete_leading_text
 python delete_leading_text.py <input file name> [output file name]
 ```
-
 
 # find_replace
 
