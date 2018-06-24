@@ -19,8 +19,7 @@ Needs work:
 """
 # import itertools
 # from pprint import pprint
-import re
-import webbrowser
+import re, webbrowser
 
 class App:
 
