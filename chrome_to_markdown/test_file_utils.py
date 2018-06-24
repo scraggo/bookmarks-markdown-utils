@@ -8,13 +8,6 @@ fUtil = FileUtils()
 
 cwd = os.getcwd()
 
-# def inc(x):
-#     return x + 1
-
-
-# def test_answer():
-#     assert inc(3) == 5
-
 def create_file(fName = 'test_file.txt'):
   f = open(fName,"w+")
   return fName
