@@ -74,6 +74,7 @@ python combine_files.py [-h] # to see necessary arguments
 Purpose:
 
 - Copy mobile bookmarks to separate file. It deletes all links before `# MOBILE BOOKMARKS`
+- (Note: this script is called inside `main.py` of "chrome_to_markdown")
 
 ```bash
 # from project root:
@@ -87,10 +88,12 @@ Purpose:
 
 - Given a bookmarks html file (commonly used bookmarks backup format), after all styling and classes are removed, we're left with a "clean" html file. (Cleaning is not done inside this codebase.)
 - There are multiple scripts that can be run depending on the format:
+
   1. `find_replace_chrome_html.py`
   2. `find_replace_evernote_html.py`
   3. `find_replaceJSON_FF_01.py` (Firefox)
   4. `find_replaceJSON_FF_02.py` (Firefox)
+
 - The html will be converted to markdown.
 
 ```bash
@@ -99,17 +102,19 @@ cd find_replace
 python find_replace_<scriptname> [*input file] [*output path]
 ```
 
-\* Note: only 1 and 2 allow user to specify input and output paths. More documentation is inside the scripts. (<- Need to fix.)
+\* Note: only scripts 1 and 2 allow user to specify input and output paths. More documentation is inside the scripts. (<- to fix.)
 
 # make_link
 
 Purpose:
 
 - Given links in a few formats (plain url, Evernote), the text will be converted to markdown. 
+
   1. `makelink_evernote_md.py`
   2. `makelink_url.py`
-- More documentation is inside the scripts. (<- Need to fix.)
+
 - Follow program instructions for copying text to clipboard.
+- More documentation is inside the scripts. (<- to fix.)
 
 ```bash
 # from project root:
@@ -122,8 +127,8 @@ python makelink_<scriptname>
 Purpose:
 
 - Given links in OneTab format (the "Import/Export" option), the text will be converted to markdown. 
-- More documentation is inside the scripts. (<- Need to fix.)
 - Follow program instructions for copying text to clipboard.
+- More documentation is inside the scripts. (<- to fix.)
 
 ```bash
 # from project root:
@@ -136,8 +141,8 @@ python onetab_to_markdown.py
 Purpose:
 
 - Given links in markdown format with "tags", the grouped text will be sorted alphabetically.
-- More documentation is inside the scripts. (<- Need to fix.)
 - Follow program instructions for copying text to clipboard.
+- More documentation is inside the scripts. (<- to fix.)
 
 ```bash
 # from project root:
