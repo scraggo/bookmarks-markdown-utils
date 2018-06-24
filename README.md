@@ -1,11 +1,11 @@
 # Bookmarks to Markdown Utilities
 
-Suite of command-line tools for Chrome bookmark management. (There is some functionality for OneTab, Evernote, and FireFox.) Designed for users who:
+Collection of command-line tools for Chrome bookmark management. (There is some functionality for OneTab, Evernote, and FireFox.) Designed for users who:
 
-- Are tired of managing a large bookmark collection inside of Chrome.
-- Use Chrome for both Desktop and Mobile bookmarking (and mainly use the "Mobile Bookmarks" folder)
-- Want to convert bookmarks into individual markdown files
-- Want a way to visit a site and tag the bookmark with minimal mouse movement
+- dislike managing a large bookmark collection inside of Chrome.
+- use Chrome for both Desktop and Mobile bookmarking (and mainly use the "Mobile Bookmarks" folder)
+- want to convert bookmarks into individual markdown files
+- want a way to visit a site and tag the bookmark with minimal mouse movement
 - ...and more
 
 Note: the configuration file needs to be created with the instructions below:
@@ -36,6 +36,13 @@ node_scripts = {
 
 \* Firefox JSON file location (Mac): "~/Library/Application Support/Google/Chrome/Default/Bookmarks"
 
+# Using the scripts
+
+This is entirely written in Python 3+. Non-standard modules include:
+
+- pyperclip
+- pytest (for running tests)
+
 ## chrome-to-markdown
 
 Purpose:
@@ -43,6 +50,11 @@ Purpose:
 - Backup Chrome 'Bookmarks' file to directory in config file.
 - Convert file to markdown format.
 - Copy mobile bookmarks to separate file.
+- You may delete the bookmarks in your Chrome mobile bookmarks folder afterwards.
+
+`cd chrome-to-markdown`
+
+`python main.py`
 
 ## deleteLeadingText
 

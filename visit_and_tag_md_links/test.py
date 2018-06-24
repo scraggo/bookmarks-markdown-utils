@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from link_org_nospace import *
+from visit_and_tag_md_links import App
 
 todoTxt = \
 '''

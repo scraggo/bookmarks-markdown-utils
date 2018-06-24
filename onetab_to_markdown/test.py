@@ -2,7 +2,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from onetab2mkdn import *
+from onetab_to_markdown import App
 
 #paste links here:
 testlinks = '''

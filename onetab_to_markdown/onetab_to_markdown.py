@@ -9,8 +9,7 @@ Created on
 Title: Onetab export to Markdown URL List element
 """
 
-import re
-import string
+import re, string
 import pyperclip
 
 class App:

@@ -2,10 +2,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os
-import platform
-import re
-import sys
+import os, platform, re, sys
 from shutil import copy
 # import subprocess
 
