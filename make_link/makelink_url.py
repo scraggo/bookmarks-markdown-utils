@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Title: Evernote Clipped Bookmark to Markdown URL List element
+Title: URL to Markdown URL List element
 
 Description: Copy links to clipboard in the input format. They'll be sent to your clipboard in the output format.
 
 Example input:
-site title | site.com
-
-[http://example.com](http://example.com) - site description here...
+https://example1.com
+https://example2.com
 
 Example output:
-* site title | site.com - [http://example.com](http://example.com) - site description here...
+* [https://example1.com](https://example1.com)
+* [https://example2.com](https://example2.com)
 """
 
 import re, sys
@@ -20,19 +20,17 @@ sys.path.insert(0, '../utils')
 from pyperclip_interface import PyperInterface
 
 def reformat_links(linklist):
-    find_md_regex = re.compile(r'^\[https?.*\]\(https?.*\)')
     newformat = []
     for line in linklist:
+        line = line.strip()
         if line == '':
             continue
-        if find_md_regex.match(line):
-            newformat.append(line)
         else:
-            newformat.append('\n\n* {} - '.format(line))
+            newformat.append('* [{}]({})'.format(line, line))
     return newformat
 
 def main():    
-    in_message = 'Copy your Evernote links to clipboard, press ENTER when done:'
+    in_message = 'Copy your URL links to clipboard, press ENTER when done:'
     out_message = 'Finished!\nMarkdown links were copied to your clipboard.'
     pyper = PyperInterface(in_message, out_message)
 
@@ -40,7 +38,7 @@ def main():
     linklist = links.split('\n')
 
     reformatted = reformat_links(linklist)
-    pyper.send_to_clipboard(''.join(reformatted))
+    pyper.send_to_clipboard('\n'.join(reformatted))
 
 if __name__ == '__main__':
     main()
