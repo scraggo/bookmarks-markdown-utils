@@ -7,14 +7,13 @@ Created on 4/26/17, 11:18 AM
 @author: davecohen
 
 Title: Convert Chrome Bookmarks JSON file to Markdown
-    and backup Chrome Bookmarks
 
 Output Format:
-* [UPS: Register](https://www.ups.com/one-to-one/login) | [https://www.ups.com/one-to-one/login](https://www.ups.com/one-to-one/login)
+* [site name](http://example.com) | [http://example.com](http://example.com)
 
-Input Example:
-"name": "UPS: Register",
-"url": "chrome-extension://klbibkeccnjlkjkiokjodocebajanakg/suspended.html#uri=https://www.ups.com/one-to-one/login"
+Input Example: (json)
+"name": "Site Name",
+"url": "chrome-extension://klbibkeccnjlkjkiokjodocebajanakg/suspended.html#uri=http://example.com"
 
 parsing:
 delete: "type": "url",
