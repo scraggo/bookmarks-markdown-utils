@@ -46,10 +46,11 @@ Below are descriptions of each folder with relevant scripts and instructions for
 
 Purpose:
 
-- Backup Chrome 'Bookmarks' file to directory in config file.
+- Backup Chrome 'Bookmarks' file to directory in config file. 
 - Convert file to markdown format.
 - Copy mobile bookmarks to separate file. (this is a call to `delete_leading_text` - see below).
 - You may delete the bookmarks in your Chrome mobile bookmarks folder afterwards.
+- **Credit for part of this script goes to** [DavidMetcalfe/Chrome-Bookmarks-Parser: Back up and parse Google Chrome's Bookmarks.bak file](https://github.com/DavidMetcalfe/Chrome-Bookmarks-Parser).
 
 ```bash
 # from project root:
