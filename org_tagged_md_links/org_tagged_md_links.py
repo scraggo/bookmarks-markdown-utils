@@ -38,7 +38,7 @@ class App:
                 self.encoded_list.append({'header': sublist[0], 'data': sublist[1:]})
             else:
                 print()
-                #add a custom header or hit enter to add a default zzzzz
+                #add a custom header or hit enter to add a default LOWEST_CHAR
                 for s in sublist:
                     t = s.split('](')
                     if t[1]:
@@ -60,6 +60,10 @@ class App:
         headerIn = input('> ')
         return headerIn
 
+    def returnTags(self):
+        headers = map(lambda item: item['header'], self.encoded_list)
+        return ', '.join(sorted(list(set(headers))))
+
     def return_sorted(self):
         #returns a string sorted data. make sure to run block_encoder first.
         sortedBlocks = []
@@ -78,7 +82,9 @@ def main():
     pause = input('> ')
     orgLinks = pyperclip.paste()
     o = App(orgLinks)
-    pyperclip.copy(o.return_sorted())
+    fullText = o.returnTags() + '\n\n' + o.return_sorted()
+    # pyperclip.copy(o.return_sorted())
+    pyperclip.copy(fullText)
     print('Your links were organized and copied to clipboard.')
 
 if __name__ == '__main__':

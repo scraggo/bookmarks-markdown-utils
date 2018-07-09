@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from link_org_blocks import *
+from pprint import pprint
+import org_tagged_md_links
 
 ORG_LINKS = '''
 # MOBILE LINKS
@@ -59,20 +60,27 @@ some service
 def test_block_encoder():
     # global ORG_LINKS
     text = ORG_LINKS
-    app = App(text)
+    app = org_tagged_md_links.App(text)
     pprint(app.encoded_list)
+
+def test_return_tags():
+    # global ORG_LINKS
+    text = ORG_LINKS
+    app = org_tagged_md_links.App(text)
+    print(app.returnTags())
 
 def test_return_sorted():
     # global ORG_LINKS
     text = ORG_LINKS
-    app = App(text)
+    app = org_tagged_md_links.App(text)
     print(app.return_sorted())
 
 def test_main():
-    main()
+    org_tagged_md_links.main()
 
 def run_tests():
     # test_block_encoder()
+    # test_return_tags()
     # test_return_sorted()
     test_main()
 
