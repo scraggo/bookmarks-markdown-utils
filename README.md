@@ -42,7 +42,7 @@ This is entirely written in Python 3+. Non-standard modules include:
 
 Below are descriptions of each folder with relevant scripts and instructions for running the scripts. The instructions assume you are in the project root in your command line app of choice (terminal.app, iterm.app, etc.).
 
-### chrome-to-markdown
+### chrome_to_markdown
 
 Purpose:
 
@@ -54,7 +54,7 @@ Purpose:
 
 ```bash
 # from project root:
-cd chrome-to-markdown
+cd chrome_to_markdown
 python main.py
 ```
 
