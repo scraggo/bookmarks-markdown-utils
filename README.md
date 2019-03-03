@@ -15,18 +15,22 @@ Note: the configuration file needs to be created with the instructions below:
 - `open ../config.json` to open file for editing.
 - (Optional) Replace given directories with your own. (see below)
 
-```
-directories = {
-  "bookmarksRootDir": {{ ROOT DIRECTORY }},
-  "mobileLinksDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
-  "markdownBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
-  "chrJsonBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
-  "combinedFiles": {{ DIRECTORY INSIDE ROOT DIRECTORY  or '' }}
-  "firefoxJson": {{ *LOCATION OF FIREFOX JSON FILE }}
-}
+```json
+{
+  "directories": {
+    "bookmarksRootDir": {string} root directory,
+    "chrJsonBackupsDir": {string} directory inside root directory or "",
+    "combinedFiles": {string} directory inside root directory  or "",
+    "firefoxJson": {string} *location of firefox json file,
+    "markdownBackupsDir": {string} directory inside root directory or "",
+    "mobileLinksDir": {string} directory inside root directory or ""
+  },
 
-filenames = {
-  'chr_md_file_prefix': {{ STRING - ex: 'chrome.md' }},
+  "filenames": {
+    "chr_md_file_prefix": {string} ex: "chrome.md",
+  },
+
+  "markdownFormat": {string} one of "short", "standard", "long"
 }
 
 ```
