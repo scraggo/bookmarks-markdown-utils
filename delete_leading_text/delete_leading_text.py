@@ -1,4 +1,5 @@
-import os, sys
+import os
+import sys
 
 # this import only works if you're in this directory
 sys.path.insert(0, '../utils')
@@ -7,9 +8,9 @@ from get_config import get_json_config
 dirs = get_json_config()['directories']
 
 constants = {
-  'title': '## MOBILE BOOKMARKS',
-  'outputMessage': 'Your file has been written: ',
-  'extension': '-mobile.md'
+    'title': '## MOBILE BOOKMARKS',
+    'outputMessage': 'Your file has been written: ',
+    'extension': '-mobile.md'
 }
 
 description = '''error: expected inputFilename
@@ -21,7 +22,7 @@ This script is called after chrome-to-markdown. It copies the markdown file to a
 '''
 
 if len(sys.argv) < 2:
-  sys.exit(description)
+    sys.exit(description)
 
 inputFilePath = sys.argv[1]
 
@@ -29,24 +30,26 @@ outputFilePath = os.path.join(dirs['bookmarksRootDir'], dirs['mobileLinksDir'])
 
 # optional output path:
 if len(sys.argv) > 2:
-  outputFilePath = sys.argv[2]
+    outputFilePath = sys.argv[2]
 
-date = inputFilePath[-9:-3] # get date
+date = inputFilePath[-9:-3]  # get date
 outputFilename = date + constants['extension']
 fullOutputPath = os.path.join(outputFilePath, outputFilename)
 
 if os.path.exists(fullOutputPath):
-  sys.exit('File exists: ' + fullOutputPath)
+    sys.exit('File exists: ' + fullOutputPath)
+
 
 def writeToFile():
-  with open(fullOutputPath, 'w') as outfile:
-    found = False
-    with open(inputFilePath, 'r') as infile:
-      for line in infile:
-        if constants['title'] in line:
-          found = True
-        if found:
-          outfile.write(line.strip() + '\n')
+    with open(fullOutputPath, 'w') as outfile:
+        found = False
+        with open(inputFilePath, 'r') as infile:
+            for line in infile:
+                if constants['title'] in line:
+                    found = True
+                if found:
+                    outfile.write(line.strip() + '\n')
+
 
 writeToFile()
 print('\n\n' + constants['outputMessage'] + fullOutputPath)

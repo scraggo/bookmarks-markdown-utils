@@ -15,25 +15,29 @@ Note: the configuration file needs to be created with the instructions below:
 - `open ../config.json` to open file for editing.
 - (Optional) Replace given directories with your own. (see below)
 
-```
-directories = {
-  "bookmarksRootDir": {{ ROOT DIRECTORY }},
-  "mobileLinksDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
-  "markdownBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
-  "chrJsonBackupsDir": {{ DIRECTORY INSIDE ROOT DIRECTORY or '' }},
-  "combinedFiles": {{ DIRECTORY INSIDE ROOT DIRECTORY  or '' }}
-  "firefoxJson": {{ *LOCATION OF FIREFOX JSON FILE }}
-}
+```json
+{
+  "directories": {
+    "bookmarksRootDir": {string} root directory,
+    "chrJsonBackupsDir": {string} directory inside root directory or "",
+    "combinedFiles": {string} directory inside root directory  or "",
+    "firefoxJson": {string} *location of firefox json file,
+    "markdownBackupsDir": {string} directory inside root directory or "",
+    "mobileLinksDir": {string} directory inside root directory or ""
+  },
 
-filenames = {
-  'chr_md_file_prefix': {{ STRING - ex: 'chrome.md' }},
+  "filenames": {
+    "chr_md_file_prefix": {string} ex: "chrome.md",
+  },
+
+  "markdownFormat": {string} one of "short", "standard", "long"
 }
 
 ```
 
 \* Firefox JSON file location (Mac): "~/Library/Application Support/Google/Chrome/Default/Bookmarks"
 
-### Using the scripts
+## Using the scripts
 
 This is entirely written in Python 3+. Non-standard modules include:
 
@@ -42,11 +46,11 @@ This is entirely written in Python 3+. Non-standard modules include:
 
 Below are descriptions of each folder with relevant scripts and instructions for running the scripts. The instructions assume you are in the project root in your command line app of choice (terminal.app, iterm.app, etc.).
 
-# chrome-to-markdown
+### chrome_to_markdown
 
 Purpose:
 
-- Backup Chrome 'Bookmarks' file to directory in config file. 
+- Backup Chrome 'Bookmarks' file to directory in config file.
 - Convert file to markdown format.
 - Copy mobile bookmarks to separate file. (this is a call to `delete_leading_text` - see below).
 - You may delete the bookmarks in your Chrome mobile bookmarks folder afterwards.
@@ -54,11 +58,11 @@ Purpose:
 
 ```bash
 # from project root:
-cd chrome-to-markdown
+cd chrome_to_markdown
 python main.py
 ```
 
-# combine_files
+### combine_files
 
 Purpose:
 
@@ -70,7 +74,7 @@ cd combine_files
 python combine_files.py [-h] # to see necessary arguments
 ```
 
-# delete_leading_text
+### delete_leading_text
 
 Purpose:
 
@@ -83,7 +87,7 @@ cd delete_leading_text
 python delete_leading_text.py <input file name> [output file name]
 ```
 
-# find_replace
+### find_replace
 
 Purpose:
 
@@ -105,11 +109,11 @@ python find_replace_<scriptname> [*input file] [*output path]
 
 \* Note: only scripts 1 and 2 allow user to specify input and output paths. More documentation is inside the scripts. (<- to fix.)
 
-# make_link
+### make_link
 
 Purpose:
 
-- Given links in a few formats (plain url, Evernote), the text will be converted to markdown. 
+- Given links in a few formats (plain url, Evernote), the text will be converted to markdown.
 
   1. `makelink_evernote_md.py`
   2. `makelink_url.py`
@@ -123,11 +127,11 @@ cd make_link
 python makelink_<scriptname>
 ```
 
-# onetab_to_markdown
+### onetab_to_markdown
 
 Purpose:
 
-- Given links in OneTab format (the "Import/Export" option), the text will be converted to markdown. 
+- Given links in OneTab format (the "Import/Export" option), the text will be converted to markdown.
 - Follow program instructions for copying text to clipboard.
 - More documentation is inside the scripts. (<- to fix.)
 
@@ -137,7 +141,7 @@ cd onetab_to_markdown
 python onetab_to_markdown.py
 ```
 
-# org_tagged_md_links
+### org_tagged_md_links
 
 Purpose:
 
@@ -151,11 +155,11 @@ cd org_tagged_md_links
 python org_tagged_md_links.py
 ```
 
-# visit_and_tag_md_links
+### visit_and_tag_md_links
 
 Purpose:
 
-Given links in markdown format (all links are in a markdown list, prefixed with '*'):
+Given links in markdown format (all links are in a markdown list, prefixed with '\*'):
 
 - each link is visited in your default browser,
 - then you can "tag" the link in the terminal. (switching can be done with keyboard using CMD+TAB)

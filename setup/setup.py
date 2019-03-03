@@ -1,47 +1,46 @@
-import os, sys, json
-
-# this import only works if you're in this directory
-sys.path.insert(0, '../utils')
-import file_utils
-
-fUtils = file_utils.FileUtils()
+import os
+import sys
+import json
 
 userHome = os.path.expanduser('~')
-bookmarksRootDir = os.path.join(userHome, 'Desktop', 'bookmarksBackups')
-mobileLinksDir = 'mobileLinks'
-markdownBackupsDir = os.path.join("markdown-converted-full")
-chrJsonBackupsDir = os.path.join("chrome-json")
-deleteLeadingText = os.path.join("..","deleteLeadingText","deleteLeadingText.js")
 config_name = 'config.json'
 
 config_template = {
-  "directories": {
-    "bookmarksRootDir": bookmarksRootDir,
-    "mobileLinksDir": mobileLinksDir,
-    "markdownBackupsDir": markdownBackupsDir,
-    "chrJsonBackupsDir": chrJsonBackupsDir
-  },
+    "directories": {
+        "bookmarksRootDir": os.path.join(userHome, 'Desktop', 'bookmarksBackups'),
+        "chrJsonBackupsDir": os.path.join("chrome-json"),
+        "firefoxJson": os.path.join(
+            userHome, "Library/Application Support/Google/Chrome/Default/Bookmarks"),
+        "markdownBackupsDir": os.path.join("markdown-converted-full"),
+        "mobileLinksDir": "mobileLinks",
+    },
 
-  "filenames": {
-    "chr_md_file_prefix": "chrome.md"
-  },
+    "filenames": {
+        "chr_md_file_prefix": "chrome.md"
+    },
 
-  "node_scripts": {
-    "deleteLeadingText": deleteLeadingText
-  }
+    "markdownFormat": "standard"
 }
 
+
 def write_config_file(new_filename):
-  with open(new_filename, 'w') as new_file:
-    new_file.write(
-      json.dumps(config_template, indent=4)
-    )
-  print('File successfully written:', new_filename)
+    with open(new_filename, 'w') as new_file:
+        new_file.write(
+            json.dumps(config_template, indent=4)
+        )
+    print('File successfully written:', new_filename)
 
 
-try:
-  config_main_directory = os.path.join('..', config_name)
-  fUtils.fileExists(config_main_directory)
-  write_config_file(config_main_directory)
-except:
-  print('file already exists.')
+def file_exists(filePath):
+    if os.path.exists(filePath):
+        raise OSError(filePath + ' file exists.')
+
+
+def main():
+    config_main_directory = os.path.join('..', config_name)
+    file_exists(config_main_directory)
+    write_config_file(config_main_directory)
+
+
+if __name__ == "__main__":
+    main()

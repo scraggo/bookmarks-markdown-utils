@@ -2,7 +2,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os, platform, re, sys
+import os
+import platform
+import re
+import sys
 from shutil import copy
 # import subprocess
 
@@ -11,6 +14,7 @@ userhome = os.path.expanduser('~').replace('\\', '\\\\')
 useros = platform.system()
 destination = os.path.dirname(os.path.realpath(__file__))
 # cmd = ['python', 'Chrome_Bookmarks_MinHTML.py']
+
 
 def getChromePath():
 
@@ -68,19 +72,21 @@ def getChromePath():
 
 # print(getChromePath()) #tested, works
 
-def getChromeBak(chrPath = None):
+
+def getChromeBak(chrPath=None):
     if not chrPath:
         chrPath = getChromePath()
     filePath = os.path.join(
         chrPath, "Bookmarks.bak")
 #         print(filePath) #debug
     if os.path.exists(filePath):
-#             copy(filePath, destination)
+        #             copy(filePath, destination)
         return filePath
     else:
         sys.exit("Cannot find Bookmarks.bak file.")
-    
-def getChromeJSON(chrPath = None):
+
+
+def getChromeJSON(chrPath=None):
     '''This is the main bookmarks file, without .bak extension.'''
     if not chrPath:
         chrPath = getChromePath()
