@@ -1,4 +1,4 @@
-#chrome_to_markdown.py
+# chrome_to_markdown.py
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -15,18 +15,22 @@ Input Example: (json)
 "name": "Site Name",
 "url": "chrome-extension://klbibkeccnjlkjkiokjodocebajanakg/suspended.html#uri=http://example.com"
 
-parsing:
+parsing: (standard format)
 delete: "type": "url",
-replace: 
+replace:
 "name": with [ ]
 "url": with ( )
 """
 
-#Standard library:
-import os, sys, re, shutil
+# Standard library:
+import os
+import sys
+import re
+import shutil
 
-#Local modules:
+# Local modules:
 from chr_path import getChromeJSON
+from markdown_formatter import markdownFormatMap
 
 # this import only works if you're in this directory
 sys.path.insert(0, '../utils')
@@ -39,6 +43,7 @@ config = get_json_config()
 
 fileUtils = FileUtils()
 
+
 class MarkdownCreator:
     def __init__(self):
         self.md_output = ''
@@ -47,17 +52,17 @@ class MarkdownCreator:
         '''deletes type, url in f_str
         '''
         return f_str\
-        .replace('"type": "url",', '')
-        
+            .replace('"type": "url",', '')
+
     def replacer(self, f_str):
         '''replaces html <a> tags
         '''
         return f_str \
-        .replace('<a', '</p>\n<a') \
-        .replace('</a>', '</a>\n - ')
+            .replace('<a', '</p>\n<a') \
+            .replace('</a>', '</a>\n - ')
 
     def get_confirmation(self):
-        ###CHECKS
+        # CHECKS
         print('''
         DON'T FORGET:
             -make sure that your mobile bookmarks have synced to desktop
@@ -70,31 +75,29 @@ class MarkdownCreator:
         return True
 
     def create_output_path(self):
-        md_oTemp = os.path.join(config['directories']['bookmarksRootDir'], config['directories']['markdownBackupsDir'], config['filenames']['chr_md_file_prefix'])
+        md_oTemp = os.path.join(config['directories']['bookmarksRootDir'], config['directories']
+                                ['markdownBackupsDir'], config['filenames']['chr_md_file_prefix'])
         self.md_output = DA.date_append(md_oTemp)
 
     def write_bookmarks_to_file(self, _chrJSON):
         output = open(self.md_output, 'w')
+
+        MD_FORMAT = config['markdownFormat']
+        MD_FUNCS = markdownFormatMap[MD_FORMAT]
+        handle_name = MD_FUNCS['name']
+        handle_url = MD_FUNCS['url']
 
         with open(_chrJSON) as f:
             for line in f:
                 line = line.strip()
                 line = self.deleter(line)
                 if line.startswith('"name"'):
-                    line = line.replace('"name": "', '* [')
-                    line = line.replace('",', ']')
-                    output.write(line)
+                    output.write(handle_name(line))
                 elif line.startswith('"url"'):
-                    # if 'chrome-extension://' in line:
-                        # line = re.sub(r"chrome-extension://([a-z])+/suspended.html#uri=", "", line)
                     line = re.sub(r"(chrome-extension://)(.+)(uri=)", "", line)
-                    line = line.replace('"url": "', '(')
-                    line_paren = line.replace('"', ')')
-                    line = line_paren + ' | ' + line_paren.replace('(', '[').replace(')', ']') + line_paren
-        #             print(self.replacer(line))
-                    output.write(line + '\n')
+                    output.write(handle_url(line) + '\n')
                 elif line == '"synced": {':
-                    output.write('\n\n## MOBILE BOOKMARKS\n\n')
+                    output.write('\n\n# MOBILE BOOKMARKS\n\n')
 
         output.close()
 
@@ -107,10 +110,10 @@ class MarkdownCreator:
 
         self.create_output_path()
 
-        #Markdown file - check output location
-        fileUtils.fileExists(self.md_output) #raises error if exists
+        # Markdown file - check output location
+        fileUtils.fileExists(self.md_output)  # raises error if exists
 
-        #Create Markdown from original "Bookmarks" file
+        # Create Markdown from original "Bookmarks" file
         chrJSON = getChromeJSON()
 
         # print('chrJSON', chrJSON)#debug
