@@ -2,13 +2,13 @@
 - [name](url) | [url](url)
 
 example:
-- [America’s most popular voting guide for elections, political issues, candidates, and poll data](https://www.isidewith.com/) | [https://www.isidewith.com/](https://www.isidewith.com/)
+- [Google Search](http://google.com) | [http://google.com](http://google.com)
 """
 
 
 def handle_long_name(line):
     return line\
-        .replace('"name": "', '- [')\
+        .replace('"name": "', '* [')\
         .replace('",', ']')
 
 
@@ -31,7 +31,7 @@ example:
 
 def handle_short_name(line):
     return line\
-        .replace('"name": "', '- ')\
+        .replace('"name": "', '* ')\
         .replace('",', ' ')
 
 
@@ -51,9 +51,7 @@ example:
 
 
 def handle_standard_name(line):
-    return line\
-        .replace('"name": "', '- [')\
-        .replace('",', ']')
+    return handle_long_name(line)
 
 
 def handle_standard_url(line):
