@@ -1,19 +1,28 @@
-#pythontemplate
+# pythontemplate
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on 
 
-@author: davecohen
-
+help = """
 Title: Onetab export to Markdown URL List element
 
-Format:
-https://example.com | site title
+Description: Copy links to clipboard in the input format. They'll be sent to your clipboard in the output format.
+
+Example input:
+https://example1.com | site title1
+https://example2.com | site title2
+
+Example output:
+* [https://example1.com](https://example1.com)
+* [https://example2.com](https://example2.com)
 """
 
-import re, string
+import re
+import string
+import sys
 import pyperclip
+sys.path.insert(0, '../utils')
+import arg_utils
+
 
 class App:
 
@@ -44,12 +53,13 @@ class App:
     def re_search(self, f_line):
         link_mo = self.linkRegex.search(f_line)
         if link_mo:
-            #open link if found
+            # open link if found
             return link_mo.group(1), link_mo.group(3)
         return None
 
-    
+
 def main():
+    arg_utils.show_help_if_arg(sys.argv, help)
     print('Copy your markdown links to clipboard, enter when done:')
     input('> ')
     linkTxt = pyperclip.paste()

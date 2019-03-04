@@ -1,4 +1,4 @@
-#pythontemplate
+# pythontemplate
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -11,7 +11,9 @@ usage:
 
 Title: Find / Replace in HTML
 """
-import os, json, sys
+import os
+import json
+import sys
 
 from replacer import replacer
 from create_file import create_file
@@ -31,7 +33,7 @@ def get_replaced_line(line):
         ['<dd>', ''],
         ['</dd>', '']
     ]
-        
+
     to_replace = [
         ['<dl>', '<ul>'],
         ['</dl>', '</ul>'],
@@ -40,12 +42,13 @@ def get_replaced_line(line):
     ]
     if line == '':
         return line
-    
+
     replaced = replacer(to_delete + to_replace, line)
     if replaced == '':
         return replaced
-    
+
     return replaced + '\n'
+
 
 def main():
     description_str = '''This script finds and replaces or removes certain html tags.
@@ -63,17 +66,19 @@ It can be ran after
             "flag": "-o",
             "help": "full output file path and name"
         }
-        )
+    )
 
     html_file = args.html_file
     output_location = args.o
     if not output_location:
         output_filename = 'chrome_output.html'
         config = get_json_config()
-        outputlocation = os.path.join(config['directories']['bookmarksRootDir'], output_filename)
+        outputlocation = os.path.join(
+            config['directories']['bookmarksRootDir'], output_filename)
 
     write_mode = 'w'
     create_file(outputlocation, write_mode, html_file, get_replaced_line)
+
 
 if __name__ == '__main__':
     main()
