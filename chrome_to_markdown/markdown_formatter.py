@@ -24,7 +24,6 @@ def handle_long_url(line):
 - name <url>
 
 example:
-
 - Google Search <http://google.com>
 """
 
@@ -45,7 +44,6 @@ def handle_short_url(line):
 - [name](url)
 
 example:
-
 - [Google Search](http://google.com)
 """
 
