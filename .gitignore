@@ -2,11 +2,7 @@
 .vscode/
 
 # directories / files
-reference
-old/
--Notes.md
-*/test.html
-*/test123456.md
+ignored
 
 
 # config (created with script)
@@ -15,11 +11,8 @@ config.json
 */config.json
 
 
-
-.pytest_cache/
-
-
 # Byte-compiled / optimized / DLL files
+.pytest_cache/
 __pycache__/
 *.py[cod]
 *$py.class
