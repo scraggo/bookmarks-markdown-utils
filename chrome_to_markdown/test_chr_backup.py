@@ -1,5 +1,8 @@
 
-import pytest, shutil, os, sys
+import pytest
+import shutil
+import os
+import sys
 
 from .chr_backup import chrBackup
 
@@ -11,7 +14,8 @@ from file_utils import FileUtils
 
 fUtil = FileUtils()
 
+
 def test_copy_to_chrJsonBackupsDir():
-  path = chrBackup()#creates file in default dir
-  assert isinstance(path, str)
-  assert len(path) > 0
+    path = chrBackup()  # creates file in default dir
+    assert isinstance(path, str)
+    assert len(path) > 0
