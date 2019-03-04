@@ -10,9 +10,10 @@ Collection of command-line tools for Chrome bookmark management. (There is some 
 
 Note: the configuration file needs to be created with the instructions below:
 
-- `cd setup/`
-- `python setup.py`
-- `open ../config.json` to open file for editing.
+- start in root directory
+- `python main.py setup`
+  - This will raise an error if the file already exists.
+- `open ./config.json` to open file for editing.
 - (Optional) Replace given directories with your own. (see below)
 
 ```json
@@ -58,8 +59,7 @@ Purpose:
 
 ```bash
 # from project root:
-cd chrome_to_markdown
-python main.py
+python main.py chrome_to_markdown
 ```
 
 ### combine_files
@@ -70,8 +70,7 @@ Given files of a specified type, their text is combined into one file.
 
 ```bash
 # from project root:
-cd combine_files
-python combine_files.py [-h] # to see necessary arguments
+python main.py combine_files [-h] # (help) see necessary arguments
 ```
 
 ### delete_leading_text
@@ -83,8 +82,7 @@ Purpose:
 
 ```bash
 # from project root:
-cd delete_leading_text
-python delete_leading_text.py <input file name> [output file name]
+python main.py delete_leading_text <input file name> [output file name]
 ```
 
 ### find_replace
@@ -103,8 +101,7 @@ Purpose:
 
 ```bash
 # from project root:
-cd find_replace
-python find_replace_<scriptname> [*input file] [*output path]
+python main.py find_replace_<scriptname> [*input file] [*output path]
 ```
 
 \* Note: only scripts 1 and 2 allow user to specify input and output paths. More documentation is inside the scripts. (<- to fix.)
@@ -119,12 +116,10 @@ Purpose:
   2. `makelink_url.py`
 
 - Follow program instructions for copying text to clipboard.
-- More documentation is inside the scripts. (<- to fix.)
 
 ```bash
 # from project root:
-cd make_link
-python makelink_<scriptname>
+python main.py makelink_<scriptname> [-h] # (help) more info
 ```
 
 ### onetab_to_markdown
@@ -137,8 +132,7 @@ Purpose:
 
 ```bash
 # from project root:
-cd onetab_to_markdown
-python onetab_to_markdown.py
+python main.py onetab_to_markdown
 ```
 
 ### org_tagged_md_links
@@ -151,8 +145,7 @@ Purpose:
 
 ```bash
 # from project root:
-cd org_tagged_md_links
-python org_tagged_md_links.py
+python main.py org_tagged_md_links
 ```
 
 ### visit_and_tag_md_links
@@ -167,6 +160,5 @@ Given links in markdown format (all links are in a markdown list, prefixed with 
 
 ```bash
 # from project root:
-cd visit_and_tag_md_links
-python main.py <input filepath>
+python main.py main.py <input filepath>
 ```
