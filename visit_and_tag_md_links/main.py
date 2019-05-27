@@ -68,6 +68,8 @@ def main():
     newFileName2 = get_new_filepath(md_file)
     remainingList = links.remaining_list
     write_remaining(newFileName2, remainingList)
+    # For now, inform user he can delete original file.
+    print('You may delete:\n\t', md_file)
 
 
 if __name__ == '__main__':
