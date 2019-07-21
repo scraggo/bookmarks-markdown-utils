@@ -2,8 +2,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on 4/26/17, 11:18 AM
-
 @author: davecohen
 
 Title: Convert Chrome Bookmarks JSON file to Markdown

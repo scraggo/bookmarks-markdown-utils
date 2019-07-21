@@ -10,8 +10,9 @@ config_template = {
         "bookmarksRootDir": os.path.join(userHome, 'Desktop', 'bookmarksBackups'),
         "chromeJSON": os.path.join("chrome_json"),
         "chromeMD": os.path.join("chrome_md"),
-        "firefoxJson": os.path.join(
-            userHome, "Library/Application Support/Google/Chrome/Default/Bookmarks"),
+        "firefoxHTML": os.path.join(
+            userHome, 'Desktop', 'bookmarksBackups', 'firefox'),
+        "markdownBackupsDir": os.path.join("markdown-converted-full"),
         "mobileLinksDir": "mobileLinks",
     },
 

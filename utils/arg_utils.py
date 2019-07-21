@@ -11,6 +11,7 @@ argPathMap = {
     'find_replace_evernote_html': ['find_replace', 'find_replace_evernote_html.py'],
     'find_replaceJSON_FF_01': ['find_replace', 'find_replaceJSON_FF_01.py'],
     'find_replaceJSON_FF_02': ['find_replace', 'find_replaceJSON_FF_02.py'],
+    'firefox_html_to_markdown': ['find_replace', 'firefox_html_to_markdown.py'],
     'makelink_evernote_md': ['make_link', 'makelink_evernote_md.py'],
     'makelink_url': ['make_link', 'makelink_url.py'],
     'onetab_to_markdown': ['onetab_to_markdown', 'onetab_to_markdown.py'],

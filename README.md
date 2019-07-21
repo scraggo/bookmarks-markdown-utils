@@ -23,7 +23,9 @@ Note: the configuration file needs to be created with the instructions below:
     "chromeJSON": directory inside root directory or "",
     "chromeMD": directory inside root directory or "",
     "combinedFiles": directory inside root directory  or "",
-    "firefoxJson": *location of firefox json file,
+    "mobileLinksDir": directory inside root directory or ""
+    "firefoxHTML": location of your saved firefox html backup file,
+    "markdownBackupsDir": directory inside root directory or "",
     "mobileLinksDir": directory inside root directory or ""
   },
 
@@ -36,7 +38,7 @@ Note: the configuration file needs to be created with the instructions below:
 
 ```
 
-\* Firefox JSON file location (Mac): "~/Library/Application Support/Google/Chrome/Default/Bookmarks"
+Chrome JSON file is found automatically. The default Mac location: "~/Library/Application Support/Google/Chrome/Default/Bookmarks"
 
 \*\* Formats:
 
@@ -58,6 +60,7 @@ standard:
 
 This is entirely written in Python 3+. Non-standard modules include:
 
+- html2text
 - pyperclip
 - pytest (for running tests)
 
@@ -108,8 +111,9 @@ python main.py delete_leading_text <input file name> [output file name]
 
   1. `find_replace_chrome_html.py`
   2. `find_replace_evernote_html.py`
-  3. `find_replaceJSON_FF_01.py` (Firefox)
-  4. `find_replaceJSON_FF_02.py` (Firefox)
+  3. `find_replaceJSON_FF_01.py` (Firefox) <- deprecated
+  4. `find_replaceJSON_FF_02.py` (Firefox) <- deprecated
+  5. `firefox_html_to_markdown` (Firefox) <- in progress. No "cleaning" necessary!
 
 - The html will be converted to markdown.
 
