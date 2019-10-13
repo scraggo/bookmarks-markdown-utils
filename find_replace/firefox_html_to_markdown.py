@@ -26,6 +26,7 @@ def get_output_filename(infile, filename):
     new_dir_created = fileutils.make_dir_if_not_exists(md_path)
     output_filename = os.path.join(md_path, filename)
     output_filename = DA.date_append(output_filename)
+    output_filename = fileutils.join_path(output_filename)
     # print(output_filename)
     # a slight optimization. Don't check if file exists if dir didn't exist.
     if not new_dir_created:

@@ -19,13 +19,13 @@ Note: the configuration file needs to be created with the instructions below:
 ```txt
 {
   "directories": {
-    "bookmarksRootDir": root directory,
-    "chromeJSON": directory inside root directory or "",
-    "chromeMD": directory inside root directory or "",
-    "combinedFiles": directory inside root directory  or "",
-    "firefoxHTML": location of your saved firefox html backup file,
-    "firefoxMD": location of the processed firefox md (converted from html backup),
-    "mobileLinksDir": directory inside root directory or ""
+    "bookmarksRootDir": root directory (absolute) default: ~/Desktop/bookmarksBackups,
+    "chromeJSON": directory inside root directory or "" (relative),
+    "chromeMD": directory inside root directory or "" (relative),
+    "combinedFiles": directory inside root directory or "" (relative),
+    "firefoxHTML": location of your saved firefox html backup file, expected to be called 'bookmarks.html' (absolute),
+    "firefoxMD": location of the processed firefox md converted from html backup, (relative),
+    "mobileLinksDir": directory inside root directory or "" (relative)
   },
 
   "filenames": {
