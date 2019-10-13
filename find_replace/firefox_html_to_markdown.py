@@ -11,22 +11,20 @@ import os
 # this import only works if you're in this directory
 sys.path.insert(0, '../utils')
 import date_append as DA
-from get_config import get_json_config
+from get_config import get_config_path
 from file_utils import FileUtils
 
 fileutils = FileUtils()
 
-
-def get_html_path():
-    # get firefox html file
-    return get_json_config()['directories']['firefoxHTML']
+html_path = get_config_path('directories', 'firefoxHTML')
+md_path = get_config_path('directories', 'firefoxMD')
+OUT_NAME = 'ff_backup.md'
 
 
 def get_output_filename(infile, filename):
-    dir = os.path.dirname(infile)
-    output_dir = os.path.join(dir, '_firefoxMD')
-    new_dir_created = fileutils.make_dir_if_not_exists(output_dir)
-    output_filename = os.path.join(output_dir, filename)
+    ''' @returns {string} ex. _firefoxMD/ff_backup-191012.md '''
+    new_dir_created = fileutils.make_dir_if_not_exists(md_path)
+    output_filename = os.path.join(md_path, filename)
     output_filename = DA.date_append(output_filename)
     # print(output_filename)
     # a slight optimization. Don't check if file exists if dir didn't exist.
@@ -57,8 +55,7 @@ def get_formatted_markdown(raw_markdown):
 
 
 def main():
-    html_path = get_html_path()
-    output_filename = get_output_filename(html_path, 'ff_backup.md')
+    output_filename = get_output_filename(md_path, OUT_NAME)
     with open(html_path, encoding='utf-8') as html, open(output_filename, 'w') as output:
         # <file_blob>.read() => turn file into a string.
         html_string = html.read()
