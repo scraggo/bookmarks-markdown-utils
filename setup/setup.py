@@ -12,6 +12,8 @@ config_template = {
         "chromeMD": os.path.join("chrome_md"),
         "firefoxHTML": os.path.join(
             userHome, 'Desktop', 'bookmarksBackups', 'firefox'),
+        "firefoxMD": os.path.join(
+            userHome, 'Desktop', 'bookmarksBackups', 'firefox'),
         "markdownBackupsDir": os.path.join("markdown-converted-full"),
         "mobileLinksDir": "mobileLinks",
     },

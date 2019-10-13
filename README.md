@@ -23,9 +23,8 @@ Note: the configuration file needs to be created with the instructions below:
     "chromeJSON": directory inside root directory or "",
     "chromeMD": directory inside root directory or "",
     "combinedFiles": directory inside root directory  or "",
-    "mobileLinksDir": directory inside root directory or ""
     "firefoxHTML": location of your saved firefox html backup file,
-    "markdownBackupsDir": directory inside root directory or "",
+    "firefoxMD": location of the processed firefox md (converted from html backup),
     "mobileLinksDir": directory inside root directory or ""
   },
 
