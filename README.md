@@ -20,10 +20,10 @@ Note: the configuration file needs to be created with the instructions below:
 {
   "directories": {
     "bookmarksRootDir": {string} root directory,
-    "chrJsonBackupsDir": {string} directory inside root directory or "",
+    "chromeJSON": {string} directory inside root directory or "",
     "combinedFiles": {string} directory inside root directory  or "",
     "firefoxJson": {string} *location of firefox json file,
-    "markdownBackupsDir": {string} directory inside root directory or "",
+    "chromeMD": {string} directory inside root directory or "",
     "mobileLinksDir": {string} directory inside root directory or ""
   },
 

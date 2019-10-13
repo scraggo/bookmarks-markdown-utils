@@ -8,10 +8,10 @@ config_name = 'config.json'
 config_template = {
     "directories": {
         "bookmarksRootDir": os.path.join(userHome, 'Desktop', 'bookmarksBackups'),
-        "chrJsonBackupsDir": os.path.join("chrome-json"),
+        "chromeJSON": os.path.join("chrome_json"),
+        "chromeMD": os.path.join("chrome_md"),
         "firefoxJson": os.path.join(
             userHome, "Library/Application Support/Google/Chrome/Default/Bookmarks"),
-        "markdownBackupsDir": os.path.join("markdown-converted-full"),
         "mobileLinksDir": "mobileLinks",
     },
 

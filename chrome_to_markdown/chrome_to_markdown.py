@@ -76,7 +76,7 @@ class MarkdownCreator:
 
     def create_output_path(self):
         md_oTemp = os.path.join(config['directories']['bookmarksRootDir'], config['directories']
-                                ['markdownBackupsDir'], config['filenames']['chr_md_file_prefix'])
+                                ['chromeMD'], config['filenames']['chr_md_file_prefix'])
         self.md_output = DA.date_append(md_oTemp)
 
     def write_bookmarks_to_file(self, _chrJSON):
