@@ -50,12 +50,12 @@ class FileUtils:
         output = self.join_path(directories['mobileLinksDir'])
         return shutil.move(input_file_path, output)
 
-    def copy_to_markdownBackupsDir(self, input_file_path):
-        output = self.join_path(directories['markdownBackupsDir'])
+    def copy_to_chromeMarkdownBackupsDir(self, input_file_path):
+        output = self.join_path(directories['chromeMD'])
         return shutil.copy(input_file_path, output)
 
     def copy_to_chrJsonBackupsDir(self, input_file_path, new_file_name):
-        newDest = self.join_path(directories['chrJsonBackupsDir'])
+        newDest = self.join_path(directories['chromeJSON'])
         # oldFileName = os.path.split(input_file_path)[1]
         # self.copy_file(input_file_path, newDest)
         oldNameNewDest = self.copy_file(input_file_path, newDest)

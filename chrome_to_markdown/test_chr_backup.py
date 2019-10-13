@@ -15,7 +15,7 @@ from file_utils import FileUtils
 fUtil = FileUtils()
 
 
-def test_copy_to_chrJsonBackupsDir():
+def test_copy_to_chromeJSON():
     path = chrBackup()  # creates file in default dir
     assert isinstance(path, str)
     assert len(path) > 0

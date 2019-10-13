@@ -76,7 +76,7 @@ class MarkdownCreator:
 
     def create_output_path(self):
         md_oTemp = os.path.join(config['directories']['bookmarksRootDir'], config['directories']
-                                ['markdownBackupsDir'], config['filenames']['chr_md_file_prefix'])
+                                ['chromeMD'], config['filenames']['chr_md_file_prefix'])
         self.md_output = DA.date_append(md_oTemp)
 
     def write_bookmarks_to_file(self, _chrJSON):
@@ -101,12 +101,12 @@ class MarkdownCreator:
 
         output.close()
 
-        print('Output to:', self.md_output, '\n')
+        print('Successfully converted json bookmarks backup to markdown!')
+        print('Output to:', self.md_output)
 
     def run_script(self):
         if not self.get_confirmation():
-            print('Exiting.')
-            return
+            return sys.exit('Exiting.')
 
         self.create_output_path()
 
