@@ -19,19 +19,19 @@ Note: the configuration file needs to be created with the instructions below:
 ```txt
 {
   "directories": {
-    "bookmarksRootDir": {string} root directory,
-    "chromeJSON": {string} directory inside root directory or "",
-    "combinedFiles": {string} directory inside root directory  or "",
-    "firefoxJson": {string} *location of firefox json file,
-    "chromeMD": {string} directory inside root directory or "",
-    "mobileLinksDir": {string} directory inside root directory or ""
+    "bookmarksRootDir": root directory,
+    "chromeJSON": directory inside root directory or "",
+    "chromeMD": directory inside root directory or "",
+    "combinedFiles": directory inside root directory  or "",
+    "firefoxJson": *location of firefox json file,
+    "mobileLinksDir": directory inside root directory or ""
   },
 
   "filenames": {
-    "chr_md_file_prefix": {string} ex: "chrome.md",
+    "chr_md_file_prefix": ex: "chrome.md",
   },
 
-  "markdownFormat": {string} **one of "short", "standard", "long"
+  "markdownFormat": **one of "short", "standard", "long"
 }
 
 ```
