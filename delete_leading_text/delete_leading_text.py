@@ -9,7 +9,7 @@ dirs = get_json_config()['directories']
 
 constants = {
     'title': '## MOBILE BOOKMARKS',
-    'outputMessage': 'Your file has been written: ',
+    'outputMessage': 'Successfully made a copy of your mobile bookmarks folder as markdown. Output to: ',
     'extension': '-mobile.md'
 }
 
@@ -52,4 +52,4 @@ def writeToFile():
 
 
 writeToFile()
-print('\n\n' + constants['outputMessage'] + fullOutputPath)
+print(constants['outputMessage'] + fullOutputPath)
