@@ -50,10 +50,7 @@ Example input:
 """
 
 import os, sys, re, json
-
-# this import only works if you're in this directory
-sys.path.insert(0, '../utils')
-from get_config import get_json_config
+import pyperclip
 
 def create_file(outputlocation, write_mode, textfile, replace_func):
     with open(outputlocation, write_mode) as output:
@@ -107,23 +104,21 @@ def get_replaced_line(line):
     return ''
 
 def main():
-    # get paths
-    config = get_json_config()
+    # get path to file
+    config = pyperclip.paste()
     # load firefox json file
-    with open(config['directories']['firefoxJson'], encoding='utf-8') as data_file:
+    with open(config, encoding='utf-8') as data_file:
         data = json.loads(data_file.read())
 
     ff_json_list = str(data).split(', ')
 
     output_filename = 'firefox_output.html'
-    outputlocation = os.path.join(config['directories']['bookmarksRootDir'], output_filename)
 
+    # put in same directory as config
+    outputlocation = config.split('/')[0:-2] + '/' + output_filename
 
     if os.path.exists(outputlocation):
-            print('Save over ' + outputlocation + '?')
-            quit = input('Press y if ok. If not ok, press enter. ')
-            if quit.lower() != 'y':
-                sys.exit('Quitting.')
+      sys.exit('Error saving file.')
 
     create_file(outputlocation, 'w', ff_json_list, get_replaced_line)
 
