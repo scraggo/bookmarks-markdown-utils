@@ -4,14 +4,16 @@ import json
 
 userHome = os.path.expanduser('~')
 config_name = 'config.json'
+bookmarks_root = os.path.join(userHome, 'Desktop', 'bookmarksBackups'),
 
 config_template = {
     "directories": {
-        "bookmarksRootDir": os.path.join(userHome, 'Desktop', 'bookmarksBackups'),
-        "chromeJSON": os.path.join("chrome_json"),
-        "chromeMD": os.path.join("chrome_md"),
-        "firefoxJson": os.path.join(
-            userHome, "Library/Application Support/Google/Chrome/Default/Bookmarks"),
+        "bookmarksRootDir": bookmarks_root,
+        "chromeJSON": os.path.join(bookmarks_root, "chrome_json"),
+        "chromeMD": os.path.join(bookmarks_root, "chrome_md"),
+        "combinedFiles": "combined",
+        "firefoxHTML": os.path.join(bookmarks_root, 'firefox_html'),
+        "firefoxMD": os.path.join(bookmarks_root, 'firefox_md'),
         "mobileLinksDir": "mobileLinks",
     },
 

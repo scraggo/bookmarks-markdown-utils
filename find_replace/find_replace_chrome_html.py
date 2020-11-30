@@ -54,7 +54,7 @@ def main():
     description_str = '''This script finds and replaces or removes certain html tags.
 It can be ran after
 - exporting a bookmarks.html file from Chrome
-- "clearning" html (I used https://html-cleaner.com/)'''
+- "cleaning" html (I used https://html-cleaner.com/)'''
 
     args = get_args(
         description_str,

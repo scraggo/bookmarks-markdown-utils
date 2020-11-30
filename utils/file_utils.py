@@ -26,6 +26,13 @@ class FileUtils:
         if os.path.exists(filePath):
             raise OSError(filePath + ' file exists.')
 
+    def make_dir_if_not_exists(self, dir):
+        """@returns {boolean} True if dir was newly created. False if it already existed."""
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+            return True
+        return False
+
     def join_path(self, top_dir, root_dir=None):
         if not root_dir:
             root_dir = directories['bookmarksRootDir']
