@@ -30,21 +30,21 @@ def get_replaced_line(line):
         ['<div>', ''],
         ['</div>', '']
     ]
-        
+
     to_replace = [
         ['<a', '</p>\n<a'],
         ['</a>', '</a>\n - ']
     ]
     if line == '':
         return line
-    
+
     line = line.replace('<div><br/>', '<p>')
     line = replacer(to_delete, line)
     line = line.strip()
 
     if line == '':
         return line
-    
+
     return replacer(to_replace, line) + '\n'
 
 def main():
