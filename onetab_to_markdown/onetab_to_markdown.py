@@ -23,7 +23,6 @@ import pyperclip
 sys.path.insert(0, '../utils')
 import arg_utils
 
-
 class App:
 
     linkRegex = re.compile(r'(https?\S*)( \| )(.*)')
@@ -42,7 +41,7 @@ class App:
         for line in self.in_list:
             found_links = self.re_search(line)
             if found_links:
-                md_link = '* [{}]({})'.format(found_links[1], found_links[0])
+                md_link = '- [{}]({})'.format(found_links[1], found_links[0])
                 self.out_list.append(md_link)
             else:
                 self.out_list.append(line.replace('http://', '## '))
@@ -66,10 +65,9 @@ def main():
 
     links = App(linkTxt)
     links.make_link()
-    print('\n'*20, 'Finished!\n\n\n')
     input('Press Enter to copy sorted links to your clipboard.')
     pyperclip.copy(links.return_links())
-
+    print('Sorted links copied!')
 
 if __name__ == '__main__':
     main()
